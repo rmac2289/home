@@ -9,20 +9,42 @@ export const Cities = ({ dataArray }) => {
             <Link href={city.cityGuideUrl}>
               <a target="_blank">
                 <h2 style={styles.cityName}>
-                  {city.city}, {city.state}
+                  {city.cityName}, {city.state}
                 </h2>
               </a>
             </Link>
-            <img
+            {/* <img
               width="300"
               style={styles.img}
               src={city.image}
               alt={city.cityName}
-            />
+            /> */}
+            <iframe
+              src={city.mapIframe}
+              width="300"
+              height="200"
+              style={{ border: 0, borderRadius: 5 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <p style={styles.homePriceP}>
+              <strong style={styles.homePrice}>Population: </strong>
+              {city.population}
+            </p>
             <p style={styles.homePriceP}>
               <strong style={styles.homePrice}>Median Home Price: </strong>
               {city.medianHomePrice}
             </p>
+            <p style={styles.homePriceP}>
+              <strong style={styles.homePrice}>Closest Airport: </strong>
+              {city.closestAirport}, {city.timeToAirport} drive
+            </p>
+            <p style={styles.homePriceP}>
+              <strong style={styles.homePrice}>Schools: </strong>
+              {city.schoolGrade}
+            </p>
+
             <p>{city.intro}</p>
           </div>
         );
@@ -51,7 +73,7 @@ const styles = {
     cursor: "pointer",
   },
   homePrice: {
-    color: "lightblue",
+    color: "orange",
   },
   homePriceP: {},
 };
