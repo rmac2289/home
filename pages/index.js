@@ -40,10 +40,10 @@ export async function getStaticProps() {
     let medianPrice = $(
       "#livingIn > div > div.cityGuideContent > div.cityGuideParagraph > div:nth-child(5) > span"
     ).text();
-    data[i].intro = intro;
-    data[i].image = image;
+    data[i].intro = intro || null;
+    data[i].image = image || null;
 
-    data[i].medianHomePrice = medianPrice;
+    data[i].medianHomePrice = medianPrice || null;
   }
   let dataArray = data;
   // Props returned will be passed to the page component
