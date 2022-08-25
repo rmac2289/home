@@ -1,9 +1,9 @@
 import Link from "next/link";
 import _JSXStyle from "styled-jsx/style";
-import { Stats } from './Stats'
+import Stats from './Stats'
 // pick a random city
 
-export const Cities = ({ dataArray }) => {
+export default Cities = ({ dataArray }) => {
   return (
     <>
       <div className="citiesContainer">

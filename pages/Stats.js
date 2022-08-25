@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const Stats = ({
+export default Stats = ({
   population,
   medianHomePrice,
   closestAirport,

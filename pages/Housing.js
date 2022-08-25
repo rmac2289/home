@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
 
-export const Housing = () => {
+export default Housing = () => {
   return <div>Housing</div>;
 };
 
