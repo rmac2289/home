@@ -1,6 +1,6 @@
 import Link from "next/link";
 import _JSXStyle from "styled-jsx/style";
-
+import { Stats } from './Stats'
 // pick a random city
 
 export const Cities = ({ dataArray }) => {
@@ -38,25 +38,20 @@ export const Cities = ({ dataArray }) => {
                     referrerPolicy="no-referrer-when-downgrade"
                   ></iframe>
                 </div>
-                <div className="stats">
-                  <div className="homePriceP">
-                    <strong className="homePrice">Population: </strong>
-                    {city.population}
-                  </div>
-                  <p className="homePriceP">
-                    <strong className="homePrice">Median Home Price: </strong>
-                    {city.medianHomePrice}
-                  </p>
-                  <p className="homePriceP">
-                    <strong className="homePrice">Closest Airport: </strong>
-                    {city.closestAirport}, {city.timeToAirport} drive
-                  </p>
-                  <p className="homePriceP">
-                    <strong className="homePrice">Schools: </strong>
-                    {city.schoolGrade}
-                  </p>
-                </div>
+                <Stats
+                  population={city.population}
+                  medianHomePrice={city.medianHomePrice}
+                  closestAirport={city.closestAirport}
+                  timeToAirport={city.timeToAirport}
+                  schoolGrade={city.schoolGrade}
+                  rainyDays={city.rainyDays}
+                  rainLink={city.rainLink}
+                  housingLink={city.housingLink}
+                  schoolLink={city.schoolLink}
+
+                />
               </div>
+
               <p className="intro">{city.intro}</p>
             </div>
           );
@@ -67,6 +62,7 @@ export const Cities = ({ dataArray }) => {
           min-width: 610px;
           max-width: 75%;
           display: grid;
+          position: relative;
         }
         @media screen and (min-width: 1300px) {
           .citiesContainer {
@@ -78,11 +74,7 @@ export const Cities = ({ dataArray }) => {
           align-items: flex-start;
         }
         img {
-          borderradius: 5;
-        }
-        .stats {
-          margin-bottom: 1rem;
-          margin-left: 1rem;
+          border-radius: 5;
         }
         .city {
           border: 1px solid white;
@@ -101,9 +93,6 @@ export const Cities = ({ dataArray }) => {
         .cityName:hover {
           color: #ffd700;
           border-bottom: 1px solid #ffd700;
-        }
-        .homePrice {
-          color: orange;
         }
       `}</style>
     </>

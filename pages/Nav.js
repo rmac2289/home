@@ -32,9 +32,12 @@ export const Nav = () => {
           align-items: center;
           margin: 0;
           transition: all 0.25s linear;
+          box-shadow: none;
         }
         .linkContainer:hover {
           transform: scale(1.1);
+          box-shadow: 0px 1px 3px 1px grey;
+
         }
         .nav {
           position: fixed;
