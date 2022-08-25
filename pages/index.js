@@ -32,7 +32,7 @@ export async function getStaticProps() {
   for (let i = 0; i < data.length; i++) {
     const redfinRes = await fetch(data[i].cityGuideUrl);
     const redfinBody = await redfinRes.text();
-    const $ = cheerio.load(redfinBody);
+    const $ = await cheerio.load(redfinBody);
 
     let intro = $(".cityIntro").text();
     let image = $(".cityGuideImages > img").attr("src");
@@ -40,10 +40,10 @@ export async function getStaticProps() {
     let medianPrice = $(
       "#livingIn > div > div.cityGuideContent > div.cityGuideParagraph > div:nth-child(5) > span"
     ).text();
-    data[i].intro = intro || null;
-    data[i].image = image || null;
+    data[i].intro = intro || data[i].intro;
+    data[i].image = image || data[i].image;
 
-    data[i].medianHomePrice = medianPrice || null;
+    data[i].medianHomePrice = medianPrice || data[i].medianPrice;
   }
   let dataArray = data;
   // Props returned will be passed to the page component
