@@ -58,9 +58,19 @@ export default function Cities({ dataArray }) {
         })}
       </div>
       <style jsx>{`
+      @media screen and (min-width: 610px){
         .citiesContainer {
           min-width: 610px;
-          max-width: 75%;
+          max-width: 80%;
+        }
+        .topContainer {
+          display: flex;
+          align-items: flex-start;
+        }
+      }
+      .citiesContainer {
+          width: 95%;
+          
           display: grid;
           position: relative;
         }
@@ -71,6 +81,7 @@ export default function Cities({ dataArray }) {
         }
         .topContainer {
           display: flex;
+          flex-direction: column;
           align-items: flex-start;
         }
         img {
