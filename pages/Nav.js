@@ -2,7 +2,7 @@ import Link from "next/link";
 import _JSXStyle from "styled-jsx/style";
 import sheets from "../public/sheets.png";
 import Image from "next/image";
-export default Nav = () => {
+export default function Nav() {
   return (
     <>
       <nav className="nav">

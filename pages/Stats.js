@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default Stats = ({
+export default function Stats({
   population,
   medianHomePrice,
   closestAirport,
@@ -10,7 +10,7 @@ export default Stats = ({
   rainLink,
   housingLink,
   schoolLink,
-}) => {
+}) {
   return (
     <>
       <div className="stats">

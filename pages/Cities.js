@@ -3,7 +3,7 @@ import _JSXStyle from "styled-jsx/style";
 import Stats from './Stats'
 // pick a random city
 
-export default Cities = ({ dataArray }) => {
+export default function Cities({ dataArray }) {
   return (
     <>
       <div className="citiesContainer">

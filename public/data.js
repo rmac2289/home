@@ -1,4 +1,4 @@
-export default data = [
+export const data = [
   {
     cityGuideUrl: "https://www.redfin.com/living-in/WA/Lacey/6/9353",
     cityName: "Lacey",

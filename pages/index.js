@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import * as cheerio from "cheerio";
 import Cities from "./Cities";
-import data from "../public/data";
+import { data } from "../public/data";
 import Nav from './Nav';
 
 export default function Home({ dataArray }) {

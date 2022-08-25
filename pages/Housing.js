@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
 
-export default Housing = () => {
+export default function Housing() {
   return <div>Housing</div>;
 };
 
