@@ -2,9 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import * as cheerio from "cheerio";
-import Cities from "./Cities";
+import Cities from "../components/Cities";
 import { data } from "../public/data";
-import Nav from './Nav';
+import Nav from '../components/Nav';
 
 export default function Home({ dataArray }) {
   return (
