@@ -1,6 +1,6 @@
 import Link from "next/link";
 import _JSXStyle from "styled-jsx/style";
-import Stats from './Stats'
+import Stats from "./Stats";
 // pick a random city
 
 export default function Cities({ dataArray }) {
@@ -48,7 +48,6 @@ export default function Cities({ dataArray }) {
                   rainLink={city.rainLink}
                   housingLink={city.housingLink}
                   schoolLink={city.schoolLink}
-
                 />
               </div>
 
@@ -58,19 +57,33 @@ export default function Cities({ dataArray }) {
         })}
       </div>
       <style jsx>{`
-      @media screen and (min-width: 610px){
-        .citiesContainer {
-          min-width: 610px;
-          max-width: 80%;
-        }
         .topContainer {
           display: flex;
+          flex-direction: column;
           align-items: flex-start;
         }
-      }
-      .citiesContainer {
+        .iframeContainer {
+          width: 100%;
+        }
+        iframe {
+          width: 100%;
+        }
+        @media screen and (min-width: 610px) {
+          .citiesContainer {
+            min-width: 610px;
+            max-width: 80%;
+          }
+          .iframeContainer {
+            width: 300px;
+          }
+          .topContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+          }
+        }
+        .citiesContainer {
           width: 95%;
-          
           display: grid;
           position: relative;
         }
@@ -79,11 +92,7 @@ export default function Cities({ dataArray }) {
             grid-template-columns: 1fr 1fr;
           }
         }
-        .topContainer {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
+
         img {
           border-radius: 5;
         }
@@ -108,4 +117,4 @@ export default function Cities({ dataArray }) {
       `}</style>
     </>
   );
-};
+}

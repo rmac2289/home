@@ -19,6 +19,11 @@ export default function Nav() {
             </a>
           </Link>
         </div>
+        <div className="linkContainer">
+          <div target="_blank" style={{ color: "black" }}>
+            W/O
+          </div>
+        </div>
       </nav>
       <style jsx>{`
         .linkContainer {
@@ -30,26 +35,31 @@ export default function Nav() {
           display: flex;
           justify-content: space-evenly;
           align-items: center;
-          margin: 0;
+          margin: 10px;
           transition: all 0.25s linear;
           box-shadow: none;
         }
         .linkContainer:hover {
           transform: scale(1.1);
           box-shadow: 0px 1px 3px 1px grey;
-
         }
         .nav {
-          position: fixed;
-          top: 0;
-          right: 0;
-          left: 0;
-          height: 100px;
+          height: 50px;
           padding: 1rem;
+          position: static;
+          display: flex;
         }
-        div {
-          margin: 1rem;
+        @media screen and (min-width: 610px) {
+          .nav {
+            display: initial;
+            height: 100px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+          }
         }
+
         a {
           color: black;
           font-size: 18px;
@@ -60,4 +70,4 @@ export default function Nav() {
       `}</style>
     </>
   );
-};
+}
