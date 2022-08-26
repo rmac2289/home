@@ -2,7 +2,9 @@ import Link from "next/link";
 import _JSXStyle from "styled-jsx/style";
 import sheets from "../public/sheets.png";
 import Image from "next/image";
-export default function Nav() {
+
+export default function Nav({ taxes }) {
+  console.log(taxes);
   return (
     <>
       <nav className="nav">
@@ -20,9 +22,11 @@ export default function Nav() {
           </Link>
         </div>
         <div className="linkContainer">
-          <div target="_blank" style={{ color: "black" }}>
-            W/O
-          </div>
+          <Link href="states">
+            <div target="_blank" style={{ color: "black" }}>
+              Tax
+            </div>
+          </Link>
         </div>
       </nav>
       <style jsx>{`
@@ -46,7 +50,7 @@ export default function Nav() {
         .nav {
           height: 50px;
           padding: 1rem;
-          position: static;
+          position: relative;
           display: flex;
         }
         @media screen and (min-width: 610px) {

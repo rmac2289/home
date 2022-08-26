@@ -130,7 +130,8 @@ export const data = [
     medianHomePrice: "$499,900",
     image: "",
     rainLink: "https://www.bestplaces.net/climate/city/washington/vancouver",
-    housingLink: "https://www.redfin.com/city/18823/WA/Vancouver/housing-market",
+    housingLink:
+      "https://www.redfin.com/city/18823/WA/Vancouver/housing-market",
     rainyDays: "164",
     prevMedianHomePrice: "",
     schoolGrade: "B-",
@@ -172,7 +173,8 @@ export const data = [
     medianHomePrice: "$492,450",
     image: "",
     rainLink: "https://www.bestplaces.net/climate/city/oregon/mcminnville",
-    housingLink: "https://www.redfin.com/city/11457/OR/McMinnville/housing-market",
+    housingLink:
+      "https://www.redfin.com/city/11457/OR/McMinnville/housing-market",
     rainyDays: "143",
     prevMedianHomePrice: "",
     schoolGrade: "B+",
@@ -185,3 +187,21 @@ export const data = [
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44971.963283728765!2d-123.19186235!3d45.212440650000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54954eb717c973a3%3A0xca44701bdb45cf48!2sMcMinnville%2C%20OR%2097128!5e0!3m2!1sen!2sus!4v1661310874515!5m2!1sen!2sus",
   },
 ];
+
+export const taxes = {
+  Washington: {
+    "Income Tax": "0",
+    "Sales Tax": "6.5",
+    "Property Tax": "0.93",
+  },
+  Oregon: {
+    "Income Tax": "8",
+    "Sales Tax": "0",
+    "Property Tax": "0.9",
+  },
+  California: {
+    "Income Tax": "8",
+    "Sales Tax": "7.25",
+    "Property Tax": "1.07",
+  },
+};
