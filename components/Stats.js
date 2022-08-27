@@ -28,7 +28,9 @@ export default function Stats({
         </Link>
         <p>
           <strong>Closest Airport: </strong>
-          <span>{closestAirport}, {timeToAirport} drive</span>
+          <span>
+            {closestAirport}, {timeToAirport} drive
+          </span>
         </p>
         <Link href={schoolLink}>
           <a target="_blank">
@@ -49,9 +51,9 @@ export default function Stats({
       </div>
       <style jsx>
         {`
-        span {
+          span {
             color: white;
-        }
+          }
           strong {
             transition: all 0.05s linear;
           }
@@ -60,10 +62,9 @@ export default function Stats({
             color: orange;
             border: none;
           }
-          a p:hover{
+          a p:hover {
             color: #ffd700;
             text-decoration: underline;
-            
           }
           .stats {
             margin-bottom: 1rem;
@@ -73,4 +74,4 @@ export default function Stats({
       </style>
     </>
   );
-};
+}

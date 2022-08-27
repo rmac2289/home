@@ -2,7 +2,7 @@ import Link from "next/link";
 import _JSXStyle from "styled-jsx/style";
 import { useRouter } from "next/router";
 
-export default function Nav({ taxes }) {
+export default function Nav() {
   const { route } = useRouter();
   let homeRoute = "/";
   let isHome = route === homeRoute;
