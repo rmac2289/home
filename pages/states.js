@@ -1,8 +1,8 @@
-import { userAgent } from "next/server";
 import Nav from "../components/Nav";
 import styles from "../styles/Home.module.css";
 
 export default function States({ taxes }) {
+  console.log(taxes);
   return (
     <>
       <Nav />
@@ -75,13 +75,15 @@ export async function getStaticProps() {
     process.env.ENVIRONMENT === "dev"
       ? "http://localhost:3000/api/taxes"
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/taxes";
-  const res = await fetch(url, {
-    headers: {
-      "User-Agent": `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36});`,
-    },
-  });
-  const body = await res.json();
-  let taxes = body;
-  // Props returned will be passed to the page component
-  return { props: { taxes } };
+  try {
+    const res = await fetch(url);
+    const body = await res.json();
+    console.log(body);
+    let taxes = body;
+    // Props returned will be passed to the page component
+    return { props: { taxes } };
+  } catch (error) {
+    console.log(error);
+    return { props: {} };
+  }
 }
