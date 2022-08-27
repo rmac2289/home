@@ -17,7 +17,7 @@ export default function Home({ dataArray }) {
       <main className={styles.main}>
         <h1 className={styles.title}>Where is home?</h1>
 
-        {/* <Cities dataArray={dataArray} /> */}
+        <Cities dataArray={dataArray} />
       </main>
 
       <footer className={styles.footer}></footer>

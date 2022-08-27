@@ -1,7 +1,7 @@
 import Nav from "../components/Nav";
 import styles from "../styles/Home.module.css";
 
-export default function States() {
+export default function States({ taxes }) {
   return (
     <>
       <Nav />
@@ -14,7 +14,7 @@ export default function States() {
             <th>Oregon</th>
             <th>Washington</th>
           </tr>
-          {/* <tr>
+          <tr>
             <td>Property tax</td>
             <td>{taxes.Oregon["Property Tax"]}%</td>
             <td>{taxes.Washington["Property Tax"]}%</td>
@@ -28,7 +28,7 @@ export default function States() {
             <td>Sales tax</td>
             <td>{taxes.Oregon["Sales Tax"]}%</td>
             <td>{taxes.Washington["Sales Tax"]}%</td>
-          </tr> */}
+          </tr>
         </table>
       </main>
 
@@ -69,15 +69,15 @@ export default function States() {
   );
 }
 
-// export async function getStaticProps() {
-//   let url =
-//     process.env.ENVIRONMENT === "dev"
-//       ? "http://localhost:3000/api/taxes"
-//       : "https://gorgeous-meerkat-3dd227.netlify.app/api/taxes";
-//   const res = await fetch(url);
-//   const body = await res.json();
-//   console.log(body);
-//   let taxes = body;
-//   // Props returned will be passed to the page component
-//   return { props: { taxes } };
-// }
+export async function getStaticProps() {
+  let url =
+    process.env.ENVIRONMENT === "dev"
+      ? "http://localhost:3000/api/taxes"
+      : "https://gorgeous-meerkat-3dd227.netlify.app/api/taxes";
+  const res = await fetch(url);
+  const body = await res.json();
+  console.log(body);
+  let taxes = body;
+  // Props returned will be passed to the page component
+  return { props: { taxes } };
+}
