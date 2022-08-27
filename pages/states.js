@@ -9,6 +9,7 @@ export default function States({ taxes }) {
         <h1 className={styles.title}>Oregon vs. Washington</h1>
         <div>tax info</div>
       </main>
+
       <style jsx>{`
         main {
           height: 100vh;

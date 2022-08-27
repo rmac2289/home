@@ -29,22 +29,25 @@ export default function Home({ dataArray, taxes }) {
 export async function getStaticProps() {
   // Instead of fetching your `/api` route you can call the same
   // function directly in `getStaticProps`
-  for (let i = 0; i < data.length; i++) {
-    const redfinRes = await fetch(data[i].cityGuideUrl);
-    const redfinBody = await redfinRes.text();
-    const $ = await cheerio.load(redfinBody);
+  // for (let i = 0; i < data.length; i++) {
+  //   // const redfinRes = await fetch(data[i].cityGuideUrl);
+  //   // const redfinBody = await redfinRes.text();
+  //   // const $ = await cheerio.load(redfinBody);
 
-    let intro = $(".cityIntro").text();
-    let image = $(".cityGuideImages > img").attr("src");
+  //   // let intro = $(".cityIntro").text();
+  //   // let image = $(".cityGuideImages > img").attr("src");
 
-    let medianPrice = $(
-      "#livingIn > div > div.cityGuideContent > div.cityGuideParagraph > div:nth-child(5) > span"
-    ).text();
-    // data[i].intro = intro || data[i].intro;
-    // data[i].image = image || data[i].image;
+  //   // let medianPrice = $(
+  //   //   "#livingIn > div > div.cityGuideContent > div.cityGuideParagraph > div:nth-child(5) > span"
+  //   // ).text();
+  //   // data[i].intro = intro || data[i].intro;
+  //   // data[i].image = image || data[i].image;
 
-    // data[i].medianHomePrice = medianPrice || data[i].medianPrice;
-  }
+  //   // data[i].medianHomePrice = medianPrice || data[i].medianPrice;
+  // }
+  const res = await fetch("http://localhost:3000/api/data");
+  const body = await res.json();
+  console.log(body);
   let dataArray = data;
   // Props returned will be passed to the page component
   return { props: { dataArray, taxes } };
