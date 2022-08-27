@@ -71,7 +71,12 @@ export default function States({ taxes }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/taxes");
+  let url =
+    process.env.ENVIRONMENT === "dev"
+      ? "http://localhost:3000/api/states"
+      : "https://gorgeous-meerkat-3dd227.netlify.app/api/states";
+
+  const res = await fetch(url);
   const body = await res.json();
   let taxes = body;
   // Props returned will be passed to the page component

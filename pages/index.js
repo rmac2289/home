@@ -6,7 +6,7 @@ import Cities from "../components/Cities";
 import { data, taxes } from "../public/data";
 import Nav from "../components/Nav";
 
-export default function Home({ dataArray, taxes }) {
+export default function Home({ dataArray }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -45,10 +45,14 @@ export async function getStaticProps() {
 
   //   // data[i].medianHomePrice = medianPrice || data[i].medianPrice;
   // }
-  const res = await fetch("http://localhost:3000/api/data");
+  let url =
+    process.env.ENVIRONMENT === "dev"
+      ? "http://localhost:3000/api/data"
+      : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
+  const res = await fetch(url);
   const body = await res.json();
   console.log(body);
-  let dataArray = data;
+  let dataArray = body;
   // Props returned will be passed to the page component
-  return { props: { dataArray, taxes } };
+  return { props: { dataArray } };
 }
