@@ -73,9 +73,11 @@ export default function States({ taxes }) {
 export async function getStaticProps() {
   let url =
     process.env.ENVIRONMENT === "dev"
-      ? "http://localhost:3000/api/states"
-      : "https://gorgeous-meerkat-3dd227.netlify.app/api/states";
+      ? "http://localhost:3000/api/taxes"
+      : "https://gorgeous-meerkat-3dd227.netlify.app/api/taxes";
+  console.log(url);
   const res = await fetch(url);
+  console.log(res);
   const body = await res.json();
   console.log(body);
   let taxes = body;
