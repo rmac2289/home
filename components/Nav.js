@@ -25,14 +25,15 @@ export default function Nav({ taxes }) {
           height: 65px;
           padding: 1rem;
           display: flex;
-          background: white;
+          background: black;
           align-items: center;
+          border-bottom: 1px solid white;
         }
         .linkContainer {
-          margin-left: 1rem;
+          margin-right: 1.5rem;
         }
         a {
-          color: black;
+          color: white;
           font-weight: 500;
           font-size: 18px;
           display: flex;
