@@ -1,9 +1,15 @@
 import Link from "next/link";
+import { useState } from "react";
 import _JSXStyle from "styled-jsx/style";
 import Stats from "./Stats";
+import Weather from "./Weather";
 // pick a random city
 
 export default function Cities({ dataArray }) {
+  const [showWeather, setShowWeather] = useState(false);
+  const toggleWeather = () => {
+    setShowWeather(!showWeather);
+  };
   return (
     <>
       <div className="citiesContainer">
@@ -11,7 +17,7 @@ export default function Cities({ dataArray }) {
           return (
             <div key={index} className="city">
               <div>
-                <Link href={city.cityGuideUrl}>
+                <Link href={city.citySite}>
                   <a target="_blank">
                     <h2 className="cityName">
                       {city.cityName}, {city.state}
@@ -52,6 +58,8 @@ export default function Cities({ dataArray }) {
               </div>
 
               <p className="intro">{city.intro}</p>
+              <button onClick={toggleWeather}>weather info</button>
+              {showWeather && <Weather weather={city.weather} />}
             </div>
           );
         })}
@@ -99,11 +107,9 @@ export default function Cities({ dataArray }) {
         .city {
           border: 1px solid white;
           padding: 1rem;
-          border-radius: 5px;
+          border-radius: 10px;
           margin: 15px;
-          box-shadow: 0.25rem 0.25rem #d3d3d3;
         }
-
         .cityName {
           color: orange;
           border-bottom: 1px solid orange;
