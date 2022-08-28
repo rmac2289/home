@@ -4,17 +4,27 @@ import styles from "../styles/Home.module.css";
 
 export default function States({ taxes }) {
   const [parks, setParks] = useState([]);
-  const [orParks, setOrParks] = useState([]);
-  const [waParks, setWaParks] = useState([]);
+  const [orParks, setOrParks] = useState({});
+  const [waParks, setWaParks] = useState({});
 
   useEffect(() => {
     (async () => {
-      let npsUrl = `https://developer.nps.gov/api/v1/parks?stateCode=wa%2Cor&api_key=3YdcawfOu9ProaUtfU3LiCKelraCFh1PgAdGSgTA`;
+      let npsUrl = `https://developer.nps.gov/api/v1/parks?limit=500&api_key=3YdcawfOu9ProaUtfU3LiCKelraCFh1PgAdGSgTA`;
       const npsRes = await fetch(npsUrl);
       let npsBody = await npsRes.json();
       setParks(npsBody);
-      setOrParks(npsBody.data.filter((park) => park.states === "OR"));
-      setWaParks(npsBody.data.filter((park) => park.states === "WA"));
+      let or = [];
+      let wa = [];
+      npsBody.data.map((park, index) => {
+        if (park.states.includes("OR")) {
+          or.push(park);
+        }
+        if (park.states.includes("WA")) {
+          wa.push(park);
+        }
+      });
+      setOrParks({ totalParks: or.length, parkData: or });
+      setWaParks({ totalParks: wa.length, parkData: wa });
     })();
   }, []);
 
@@ -24,28 +34,44 @@ export default function States({ taxes }) {
       <h1 className={styles.title}>Oregon vs. Washington</h1>
 
       <main>
-        <table>
-          <tr>
-            <th style={{ borderTop: "none", borderLeft: "none" }}></th>
-            <th>Oregon</th>
-            <th>Washington</th>
-          </tr>
-          <tr>
-            <td>Property tax</td>
-            <td>{taxes.Oregon["Property Tax"]}%</td>
-            <td>{taxes.Washington["Property Tax"]}%</td>
-          </tr>
-          <tr>
-            <td>Income tax</td>
-            <td>{taxes.Oregon["Income Tax"]}%</td>
-            <td>{taxes.Washington["Income Tax"]}%</td>
-          </tr>
-          <tr>
-            <td>Sales tax</td>
-            <td>{taxes.Oregon["Sales Tax"]}%</td>
-            <td>{taxes.Washington["Sales Tax"]}%</td>
-          </tr>
-        </table>
+        <div className="tableContainer">
+          <table>
+            <tr>
+              <th className="tableTitle">Taxes</th>
+              <th>OR</th>
+              <th>WA</th>
+            </tr>
+            <tr>
+              <td className="rowTitle">Property</td>
+              <td>{taxes.Oregon["Property Tax"]}%</td>
+              <td>{taxes.Washington["Property Tax"]}%</td>
+            </tr>
+            <tr>
+              <td className="rowTitle">Income</td>
+              <td>{taxes.Oregon["Income Tax"]}%</td>
+              <td>{taxes.Washington["Income Tax"]}%</td>
+            </tr>
+            <tr>
+              <td className="rowTitle">Sales</td>
+              <td>{taxes.Oregon["Sales Tax"]}%</td>
+              <td>{taxes.Washington["Sales Tax"]}%</td>
+            </tr>
+          </table>
+        </div>
+        <div className="tableContainer">
+          <table>
+            <tr>
+              <th className="tableTitle">Outdoors</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <td className="rowTitle">National Parks</td>
+              <td>{orParks.totalParks}</td>
+              <td>{waParks.totalParks}</td>
+            </tr>
+          </table>
+        </div>
       </main>
 
       <style jsx>{`
@@ -60,12 +86,31 @@ export default function States({ taxes }) {
           justify-content: flex-start;
           align-items: center;
         }
+        .tableTitle {
+          border-top: none;
+          border-left: none;
+          color: white;
+          font-size: 22px;
+          text-align: left;
+        }
+        .rowTitle {
+          text-align: left;
+          width: 200px;
+        }
+        .tableContainer {
+          padding: 1rem;
+          border: 1px solid white;
+          border-radius: 10px;
+          margin-bottom: 20px;
+        }
         table {
           font-family: arial, sans-serif;
           border-collapse: collapse;
-          width: 75%;
+          width: 300px;
         }
-
+        tr {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
         td,
         th {
           text-align: center;
@@ -74,11 +119,6 @@ export default function States({ taxes }) {
 
         th {
           color: orange;
-        }
-
-        tr:nth-child(even) {
-          background-color: white;
-          color: black;
         }
       `}</style>
     </>
