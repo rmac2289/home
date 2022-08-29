@@ -1,15 +1,11 @@
 import Link from "next/link";
-import { useState } from "react";
 import _JSXStyle from "styled-jsx/style";
+import { Checklist } from "./Checklist";
 import Stats from "./Stats";
 import Weather from "./Weather";
 // pick a random city
 
 export default function Cities({ dataArray }) {
-  const [showWeather, setShowWeather] = useState(false);
-  const toggleWeather = () => {
-    setShowWeather(!showWeather);
-  };
   return (
     <>
       <div className="citiesContainer">
@@ -56,10 +52,9 @@ export default function Cities({ dataArray }) {
                   schoolLink={city.schoolLink}
                 />
               </div>
-
               <p className="intro">{city.intro}</p>
-              <button onClick={toggleWeather}>weather info</button>
-              {showWeather && <Weather weather={city.weather} />}
+              <Weather weather={city.weather} />
+              <Checklist />
             </div>
           );
         })}

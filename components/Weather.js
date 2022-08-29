@@ -1,7 +1,15 @@
+import { useState } from "react";
+
 export default function Weather({ weather }) {
-  console.log(weather);
+  const [showWeather, setShowWeather] = useState(false);
+  const toggleWeather = () => {
+    setShowWeather(!showWeather);
+  };
   return (
     <>
+      <div onClick={toggleWeather}>
+        <h4>Weather Info</h4>
+      </div>
       <table>
         <tbody>
           <tr>
@@ -41,6 +49,16 @@ export default function Weather({ weather }) {
           text-align: left;
           width: 200px;
         }
+        h4 {
+          color: orange;
+          text-decoration: underline;
+        }
+        div {
+          cursor: pointer;
+        }
+        h4:hover {
+          color: #ffd700;
+        }
         .tableContainer {
           padding: 1rem;
           border: 1px solid white;
@@ -51,6 +69,7 @@ export default function Weather({ weather }) {
           font-family: arial, sans-serif;
           border-collapse: collapse;
           width: 100%;
+          display: ${showWeather ? "block" : "none"};
         }
         tr {
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
