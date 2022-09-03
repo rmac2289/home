@@ -3,37 +3,7 @@ import Nav from "../components/Nav";
 import styles from "../styles/Home.module.css";
 
 export default function States({ stateData }) {
-  const [parks, setParks] = useState([]);
-  const [orParks, setOrParks] = useState({});
-  const [waParks, setWaParks] = useState({});
-  const [caParks, setCaParks] = useState({});
   const { oregon, washington, california } = stateData;
-
-  useEffect(() => {
-    (async () => {
-      let npsUrl = `https://developer.nps.gov/api/v1/parks?limit=500&api_key=3YdcawfOu9ProaUtfU3LiCKelraCFh1PgAdGSgTA`;
-      const npsRes = await fetch(npsUrl);
-      let npsBody = await npsRes.json();
-      setParks(npsBody);
-      let or = [];
-      let wa = [];
-      let ca = [];
-      npsBody.data.map((park, index) => {
-        if (park.states.includes("OR")) {
-          or.push(park);
-        }
-        if (park.states.includes("WA")) {
-          wa.push(park);
-        }
-        if (park.states.includes("CA")) {
-          ca.push(park);
-        }
-      });
-      setOrParks({ totalParks: or.length, parkData: or });
-      setWaParks({ totalParks: wa.length, parkData: wa });
-      setCaParks({ totalParks: ca.length, parkData: ca });
-    })();
-  }, []);
 
   return (
     <>
@@ -67,16 +37,13 @@ export default function States({ stateData }) {
                 <td>{washington.taxes["Sales Tax"]}%</td>
                 <td>{california.taxes["Sales Tax"]}%</td>
               </tr>
-            </table>
-          </div>
-          <div className="tableContainer">
-            <table>
+
               <tr>
                 <th className="tableTitle">Politics</th>
-                {}
-                <th>OR</th>
-                <th>WA</th>
-                <th>CA</th>
+
+                <th></th>
+                <th></th>
+                <th></th>
               </tr>
               <tr>
                 <td className="rowTitle">Governor</td>
@@ -96,15 +63,12 @@ export default function States({ stateData }) {
                   {california.politics.house.d}/{california.politics.house.r}
                 </td>
               </tr>
-            </table>
-          </div>
-          <div className="tableContainer">
-            <table>
+
               <tr>
                 <th className="tableTitle">Facts</th>
-                <th>OR</th>
-                <th>WA</th>
-                <th>CA</th>
+                <th></th>
+                <th></th>
+                <th></th>
               </tr>
               <tr>
                 <td className="rowTitle">Population (m)</td>
@@ -114,9 +78,9 @@ export default function States({ stateData }) {
               </tr>
               <tr>
                 <td className="rowTitle">National Parks</td>
-                <td>{orParks.totalParks}</td>
-                <td>{waParks.totalParks}</td>
-                <td>{caParks.totalParks}</td>
+                <td>10</td>
+                <td>17</td>
+                <td>33</td>
               </tr>
               <tr>
                 <td className="rowTitle">Nickname</td>
@@ -131,15 +95,12 @@ export default function States({ stateData }) {
 
       <style jsx>{`
         main {
-          height: 100vh;
-          width: 100vw;
-          min-height: 100vh;
           padding: 2rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
-          align-items: flex-start;
+          align-items: center;
           margin: 1rem;
         }
         .tableTitle {
@@ -155,18 +116,18 @@ export default function States({ stateData }) {
         }
         .rowTitle {
           text-align: left;
-          width: 200px;
+          font-weight: 900;
         }
         .tableContainer {
           padding: 1rem;
           border: 1px solid white;
           border-radius: 10px;
-          margin-bottom: 20px;
+          width: 80%;
         }
         table {
           font-family: arial, sans-serif;
           border-collapse: collapse;
-          width: 300px;
+          width: 100%;
         }
         tr {
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
