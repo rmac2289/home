@@ -6,6 +6,7 @@ export default function States({ taxes }) {
   const [parks, setParks] = useState([]);
   const [orParks, setOrParks] = useState({});
   const [waParks, setWaParks] = useState({});
+  const [caParks, setCaParks] = useState({});
 
   useEffect(() => {
     (async () => {
@@ -15,6 +16,7 @@ export default function States({ taxes }) {
       setParks(npsBody);
       let or = [];
       let wa = [];
+      let ca = [];
       npsBody.data.map((park, index) => {
         if (park.states.includes("OR")) {
           or.push(park);
@@ -22,9 +24,13 @@ export default function States({ taxes }) {
         if (park.states.includes("WA")) {
           wa.push(park);
         }
+        if (park.states.includes("CA")) {
+          ca.push(park);
+        }
       });
       setOrParks({ totalParks: or.length, parkData: or });
       setWaParks({ totalParks: wa.length, parkData: wa });
+      setCaParks({ totalParks: ca.length, parkData: ca });
     })();
   }, []);
 
@@ -32,47 +38,82 @@ export default function States({ taxes }) {
     <>
       <Nav />
       <h1 className={styles.title}>Oregon vs. Washington</h1>
-
-      <main>
-        <div className="tableContainer">
-          <table>
-            <tr>
-              <th className="tableTitle">Taxes</th>
-              <th>OR</th>
-              <th>WA</th>
-            </tr>
-            <tr>
-              <td className="rowTitle">Property</td>
-              <td>{taxes.Oregon["Property Tax"]}%</td>
-              <td>{taxes.Washington["Property Tax"]}%</td>
-            </tr>
-            <tr>
-              <td className="rowTitle">Income</td>
-              <td>{taxes.Oregon["Income Tax"]}%</td>
-              <td>{taxes.Washington["Income Tax"]}%</td>
-            </tr>
-            <tr>
-              <td className="rowTitle">Sales</td>
-              <td>{taxes.Oregon["Sales Tax"]}%</td>
-              <td>{taxes.Washington["Sales Tax"]}%</td>
-            </tr>
-          </table>
-        </div>
-        <div className="tableContainer">
-          <table>
-            <tr>
-              <th className="tableTitle">Outdoors</th>
-              <th></th>
-              <th></th>
-            </tr>
-            <tr>
-              <td className="rowTitle">National Parks</td>
-              <td>{orParks.totalParks}</td>
-              <td>{waParks.totalParks}</td>
-            </tr>
-          </table>
-        </div>
-      </main>
+      <div className="container">
+        <main>
+          <div className="tableContainer">
+            <table>
+              <tr>
+                <th className="tableTitle">Taxes</th>
+                <th>OR</th>
+                <th>WA</th>
+                <th>CA</th>
+              </tr>
+              <tr>
+                <td className="rowTitle">Property</td>
+                <td>{taxes.Oregon["Property Tax"]}%</td>
+                <td>{taxes.Washington["Property Tax"]}%</td>
+                <td>{taxes.California["Property Tax"]}%</td>
+              </tr>
+              <tr>
+                <td className="rowTitle">Income</td>
+                <td>{taxes.Oregon["Income Tax"]}%</td>
+                <td>{taxes.Washington["Income Tax"]}%</td>
+                <td>{taxes.California["Income Tax"]}%</td>
+              </tr>
+              <tr>
+                <td className="rowTitle">Sales</td>
+                <td>{taxes.Oregon["Sales Tax"]}%</td>
+                <td>{taxes.Washington["Sales Tax"]}%</td>
+                <td>{taxes.California["Sales Tax"]}%</td>
+              </tr>
+            </table>
+          </div>
+          <div className="tableContainer">
+            <table>
+              <tr>
+                <th className="tableTitle">Politics</th>
+                <th>OR</th>
+                <th>WA</th>
+                <th>CA</th>
+              </tr>
+              <tr>
+                <td className="rowTitle">Governor</td>
+                <td>D</td>
+                <td>D</td>
+                <td>D</td>
+              </tr>
+              <tr>
+                <td className="rowTitle">House (D/R)</td>
+                <td>4/1</td>
+                <td>7/3</td>
+                <td>42/11</td>
+              </tr>
+            </table>
+          </div>
+          <div className="tableContainer">
+            <table>
+              <tr>
+                <th className="tableTitle">Facts</th>
+                <th>OR</th>
+                <th>WA</th>
+                <th>CA</th>
+              </tr>
+              <tr>
+                <td className="rowTitle">Population (m)</td>
+                <td>4.2</td>
+                <td>7.5</td>
+                <td>40</td>
+              </tr>
+              <tr>
+                <td className="rowTitle">National Parks</td>
+                <td>{orParks.totalParks}</td>
+                <td>{waParks.totalParks}</td>
+                <td>{caParks.totalParks}</td>
+              </tr>
+            </table>
+          </div>
+        </main>
+      </div>
 
       <style jsx>{`
         main {
@@ -84,7 +125,8 @@ export default function States({ taxes }) {
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
-          align-items: center;
+          align-items: flex-start;
+          margin: 1rem;
         }
         .tableTitle {
           border-top: none;
@@ -92,6 +134,10 @@ export default function States({ taxes }) {
           color: white;
           font-size: 22px;
           text-align: left;
+          color: orange;
+        }
+        .container {
+          margin: 1rem;
         }
         .rowTitle {
           text-align: left;
@@ -113,7 +159,7 @@ export default function States({ taxes }) {
         }
         td,
         th {
-          text-align: center;
+          text-align: left;
           padding: 8px;
         }
 

@@ -8,7 +8,7 @@ export default function Weather({ weather }) {
   return (
     <>
       <div onClick={toggleWeather}>
-        <h4>Weather Info</h4>
+        <h4>Weather by month</h4>
       </div>
       <table>
         <tbody>
