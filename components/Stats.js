@@ -10,6 +10,8 @@ export default function Stats({
   rainLink,
   housingLink,
   schoolLink,
+  costOfLiving,
+  costOfLivingLink,
 }) {
   return (
     <>
@@ -48,6 +50,14 @@ export default function Stats({
             </p>
           </a>
         </Link>
+        <Link href={costOfLivingLink}>
+          <a target="_blank">
+            <p>
+              <strong>Cost of Living: </strong>
+              <span>{costOfLiving}</span>
+            </p>
+          </a>
+        </Link>
       </div>
       <style jsx>
         {`
@@ -61,6 +71,12 @@ export default function Stats({
             transition: all 0.05s linear;
             color: orange;
             border: none;
+          }
+          @media screen and (min-width: 610px) {
+            p {
+              padding-top: 0;
+              margin-top: 0;
+            }
           }
           a p:hover {
             color: #ffd700;

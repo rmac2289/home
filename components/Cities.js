@@ -50,6 +50,8 @@ export default function Cities({ dataArray }) {
                   rainLink={city.rainLink}
                   housingLink={city.housingLink}
                   schoolLink={city.schoolLink}
+                  costOfLiving={city.costOfLiving}
+                  costOfLivingLink={city.costOfLivingLink}
                 />
               </div>
               <p className="intro">{city.intro}</p>
