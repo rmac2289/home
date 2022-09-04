@@ -3,8 +3,10 @@ import Nav from "../components/Nav";
 import styles from "../styles/Home.module.css";
 
 export default function States({ stateData }) {
-  const { oregon, washington, california } = stateData;
-
+  let oregon, washington, california;
+  washington = stateData[0].washington;
+  oregon = stateData[1].oregon;
+  california = stateData[2].california;
   return (
     <>
       <Nav />
@@ -154,7 +156,6 @@ export async function getStaticProps() {
   const res = await fetch(url);
   const body = await res.json();
   let stateData = body;
-
   // Props returned will be passed to the page component
   return { props: { stateData } };
 }
