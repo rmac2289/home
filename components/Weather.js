@@ -45,6 +45,10 @@ export default function Weather({ weather }) {
           font-size: 22px;
           text-align: left;
         }
+        tbody {
+          display: table;
+          width: 100%;
+        }
         .rowTitle {
           text-align: left;
           width: 200px;
@@ -69,8 +73,22 @@ export default function Weather({ weather }) {
           font-family: arial, sans-serif;
           border-collapse: collapse;
           width: 100%;
-          display: ${showWeather ? "block" : "none"};
+          display: ${showWeather ? "flex" : "none"};
+          justify-content: center;
+          animation: rotateMenu 0.25s linear;
         }
+        @keyframes rotateMenu {
+          0% {
+            opacity: 0;
+          }
+          70% {
+            opacity: 0.7;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+
         tr {
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
