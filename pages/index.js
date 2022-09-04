@@ -26,32 +26,13 @@ export default function Home({ dataArray }) {
 }
 
 export async function getStaticProps() {
-  // Instead of fetching your `/api` route you can call the same
-  // function directly in `getStaticProps`
-  // for (let i = 0; i < data.length; i++) {
-  //   // const redfinRes = await fetch(data[i].cityGuideUrl);
-  //   // const redfinBody = await redfinRes.text();
-  //   // const $ = await cheerio.load(redfinBody);
-
-  //   // let intro = $(".cityIntro").text();
-  //   // let image = $(".cityGuideImages > img").attr("src");
-
-  //   // let medianPrice = $(
-  //   //   "#livingIn > div > div.cityGuideContent > div.cityGuideParagraph > div:nth-child(5) > span"
-  //   // ).text();
-  //   // data[i].intro = intro || data[i].intro;
-  //   // data[i].image = image || data[i].image;
-
-  //   // data[i].medianHomePrice = medianPrice || data[i].medianPrice;
-  // }
   let url =
     process.env.ENVIRONMENT === "dev"
       ? "http://localhost:3000/api/data"
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
   const res = await fetch(url);
   const body = await res.json();
-  console.log(body);
   let dataArray = body;
-  // Props returned will be passed to the page component
+
   return { props: { dataArray } };
 }

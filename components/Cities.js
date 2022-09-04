@@ -3,7 +3,6 @@ import _JSXStyle from "styled-jsx/style";
 import { Checklist } from "./Checklist";
 import Stats from "./Stats";
 import Weather from "./Weather";
-// pick a random city
 
 export default function Cities({ dataArray }) {
   return (
@@ -21,12 +20,6 @@ export default function Cities({ dataArray }) {
                   </a>
                 </Link>
               </div>
-              {/* <img
-              width="300"
-              style={styles.img}
-              src={city.image}
-              alt={city.cityName}
-            /> */}
               <div className="topContainer">
                 <div className="iframeContainer">
                   <iframe
