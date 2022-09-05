@@ -3,7 +3,7 @@ import { Checklist } from "../components/Checklist";
 import Nav from "../components/Nav";
 import Weather from "../components/Weather";
 
-export default function City({ dataArray }) {
+export default function City({ checklistData, dataArray }) {
   const router = useRouter();
   const currentCity = router.query.city;
   const weather = dataArray.filter((city) => city.cityName === currentCity);
@@ -16,13 +16,15 @@ export default function City({ dataArray }) {
           <h1>{currentCity}</h1>
         </header>
         <main>
-          {/* <section>
+          <section>
             <Checklist
               checklistData={checklistData}
               currentCity={currentCity}
             />
-          </section> */}
-          <section>{/* <Weather weather={weather[0].weather} /> */}</section>
+          </section>
+          <section>
+            <Weather weather={weather[0].weather} />
+          </section>
         </main>
       </div>
       <style jsx>
@@ -74,13 +76,13 @@ export async function getStaticPaths() {
   };
 }
 export async function getStaticProps() {
-  //   let checklistUrl =
-  //     process.env.ENVIRONMENT === "dev"
-  //       ? "http://localhost:3000/api/checklist"
-  //       : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
-  //   const checklistRes = await fetch(checklistUrl);
-  //   const checklistBody = await checklistRes.json();
-  //   let checklistData = checklistBody;
+  let checklistUrl =
+    process.env.ENVIRONMENT === "dev"
+      ? "http://localhost:3000/api/checklist"
+      : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
+  const checklistRes = await fetch(checklistUrl);
+  const checklistBody = await checklistRes.json();
+  let checklistData = checklistBody;
 
   let url =
     process.env.ENVIRONMENT === "dev"
@@ -90,5 +92,5 @@ export async function getStaticProps() {
   const body = await res.json();
   let dataArray = body;
 
-  return { props: { dataArray } };
+  return { props: { dataArray, checklistData } };
 }

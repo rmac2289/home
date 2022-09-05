@@ -1,8 +1,6 @@
 import Link from "next/link";
 import _JSXStyle from "styled-jsx/style";
-import { Checklist } from "./Checklist";
 import Stats from "./Stats";
-import Weather from "./Weather";
 
 export default function Cities({ dataArray }) {
   return (
@@ -12,7 +10,7 @@ export default function Cities({ dataArray }) {
           return (
             <div key={index} className="city">
               <div>
-                <Link href={`/${city.cityName}` || ""}>
+                <Link href={`/${city.cityName}`}>
                   <a>
                     <h2 className="cityName">
                       {city.cityName}, {city.state}

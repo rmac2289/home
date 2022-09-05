@@ -16,7 +16,7 @@ export const Checklist = ({ checklistData, currentCity }) => {
             return (
               <div className="checklistItem" key={index}>
                 {city[0][item] ? "✅" : "❌"}
-                {"    "}
+                {"   "}
                 {item}
               </div>
             );
