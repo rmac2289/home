@@ -1,7 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import * as cheerio from "cheerio";
 import Cities from "../components/Cities";
 import Nav from "../components/Nav";
 
@@ -17,7 +15,7 @@ export default function Home({ dataArray }) {
       <main className={styles.main}>
         <h1 className={styles.title}>Where is home?</h1>
 
-        <Cities dataArray={dataArray} checklistData={checklistData} />
+        <Cities dataArray={dataArray} />
       </main>
 
       <footer className={styles.footer}></footer>
