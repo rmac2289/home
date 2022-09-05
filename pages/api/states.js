@@ -8,7 +8,7 @@ const client = new MongoClient(uri);
 export default async function handler(req, res) {
   if (req.method === "GET") {
     await client.connect();
-    console.log("client connected");
+    console.log("mongodb connected");
     let db = client.db("home");
     let collection = db.collection("states");
     let stateData = await collection.find({}).toArray();

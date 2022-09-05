@@ -10,9 +10,10 @@ export default async function handler(req, res) {
     await client.connect();
     console.log("mongodb connected");
     let db = client.db("home");
-    let collection = db.collection("cities");
-    let cityData = await collection.find({}).toArray();
+    let collection = db.collection("checklist");
+    let checklistData = await collection.find({}).toArray();
+
     client.close();
-    res.status(200).json(cityData);
+    res.status(200).json(checklistData);
   }
 }

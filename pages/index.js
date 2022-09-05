@@ -5,7 +5,7 @@ import * as cheerio from "cheerio";
 import Cities from "../components/Cities";
 import Nav from "../components/Nav";
 
-export default function Home({ dataArray }) {
+export default function Home({ dataArray, checklistData }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,7 +17,7 @@ export default function Home({ dataArray }) {
       <main className={styles.main}>
         <h1 className={styles.title}>Where is home?</h1>
 
-        <Cities dataArray={dataArray} />
+        <Cities dataArray={dataArray} checklistData={checklistData} />
       </main>
 
       <footer className={styles.footer}></footer>
@@ -34,5 +34,13 @@ export async function getStaticProps() {
   const body = await res.json();
   let dataArray = body;
 
-  return { props: { dataArray } };
+  let checklistUrl =
+    process.env.ENVIRONMENT === "dev"
+      ? "http://localhost:3000/api/checklist"
+      : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
+  const checklistRes = await fetch(checklistUrl);
+  const checklistBody = await checklistRes.json();
+  let checklistData = checklistBody;
+
+  return { props: { dataArray, checklistData } };
 }

@@ -4,7 +4,7 @@ import { Checklist } from "./Checklist";
 import Stats from "./Stats";
 import Weather from "./Weather";
 
-export default function Cities({ dataArray }) {
+export default function Cities({ dataArray, checklistData }) {
   return (
     <>
       <div className="citiesContainer">
@@ -49,7 +49,10 @@ export default function Cities({ dataArray }) {
               </div>
               <p className="intro">{city.intro}</p>
               <Weather weather={city.weather} />
-              <Checklist />
+              <Checklist
+                checklistData={checklistData}
+                currentCity={city.cityName}
+              />
             </div>
           );
         })}
