@@ -8,6 +8,7 @@ export default function City({ checklistData, dataArray }) {
   const currentCity = router.query.city;
   const weather = dataArray.filter((city) => city.cityName === currentCity);
   console.log(weather);
+  let data = checklistData;
   return (
     <>
       <Nav />
@@ -17,10 +18,7 @@ export default function City({ checklistData, dataArray }) {
         </header>
         <main>
           <section>
-            <Checklist
-              checklistData={checklistData}
-              currentCity={currentCity}
-            />
+            <Checklist checklistData={data} currentCity={currentCity} />
           </section>
           <section>
             <Weather weather={weather[0].weather} />
