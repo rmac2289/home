@@ -22,9 +22,7 @@ export default function City({ dataArray }) {
               currentCity={currentCity}
             />
           </section> */}
-          <section>
-            <Weather weather={weather[0].weather} />
-          </section>
+          <section>{/* <Weather weather={weather[0].weather} /> */}</section>
         </main>
       </div>
       <style jsx>
