@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 
 export default function Nav() {
   const { route } = useRouter();
-  let homeRoute = "/";
-  let isHome = route === homeRoute;
   return (
     <>
       <nav className="nav">
@@ -15,8 +13,13 @@ export default function Nav() {
           </Link>
         </div>
         <div className="linkContainer">
-          <Link href={isHome ? "/states" : "/"}>
-            <a>{isHome ? "OR vs. WA" : "home"}</a>
+          <Link href="/states">
+            <a id="states">OR vs. WA</a>
+          </Link>
+        </div>
+        <div className="linkContainer">
+          <Link href="/">
+            <a id="home">home</a>
           </Link>
         </div>
       </nav>
@@ -39,6 +42,12 @@ export default function Nav() {
           display: flex;
           justify-content: center;
           align-items: center;
+        }
+        #states {
+          color: ${route === "/states" && "grey"};
+        }
+        #home {
+          color: ${route === "/" && "grey"};
         }
         a:hover {
           text-decoration: underline;

@@ -12,8 +12,8 @@ export default function Cities({ dataArray, checklistData }) {
           return (
             <div key={index} className="city">
               <div>
-                <Link href={city.citySite}>
-                  <a target="_blank">
+                <Link href={`/${city.cityName}`}>
+                  <a>
                     <h2 className="cityName">
                       {city.cityName}, {city.state}
                     </h2>
@@ -48,11 +48,6 @@ export default function Cities({ dataArray, checklistData }) {
                 />
               </div>
               <p className="intro">{city.intro}</p>
-              <Weather weather={city.weather} />
-              <Checklist
-                checklistData={checklistData}
-                currentCity={city.cityName}
-              />
             </div>
           );
         })}
