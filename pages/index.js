@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 import Cities from "../components/Cities";
 import Nav from "../components/Nav";
 
-export default function Home({ dataArray = null }) {
+export default function Home({ dataArray }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -30,7 +30,7 @@ export async function getStaticProps() {
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
   const res = await fetch(url);
   const body = await res.json();
-  let dataArray = body;
+  let dataArray = body || null;
 
   return { props: { dataArray } };
 }

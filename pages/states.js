@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import styles from "../styles/Home.module.css";
 
-export default function States({ stateData = null }) {
+export default function States({ stateData }) {
   let oregon, washington, california;
   washington = stateData[0].washington;
   oregon = stateData[1].oregon;
@@ -155,7 +155,7 @@ export async function getStaticProps() {
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/states";
   const statesRes = await fetch(statesUrl);
   const statesBody = await statesRes.json();
-  let stateData = statesBody;
+  let stateData = statesBody || null;
 
   // Props returned will be passed to the page component
   return { props: { stateData } };

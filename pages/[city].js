@@ -3,7 +3,7 @@ import { Checklist } from "../components/Checklist";
 import Nav from "../components/Nav";
 import Weather from "../components/Weather";
 
-export default function City({ checklistData = null, dataArray = null }) {
+export default function City({ checklistData, dataArray }) {
   const router = useRouter();
   const currentCity = router.query.city;
   const weather = dataArray.filter((city) => city.cityName === currentCity);
@@ -82,7 +82,7 @@ export async function getStaticProps() {
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
   const checklistRes = await fetch(checklistUrl);
   const checklistBody = await checklistRes.json();
-  let checklistData = checklistBody;
+  let checklistData = checklistBody || null;
 
   let url =
     process.env.ENVIRONMENT === "dev"
@@ -90,7 +90,7 @@ export async function getStaticProps() {
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
   const res = await fetch(url);
   const body = await res.json();
-  let dataArray = body;
+  let dataArray = body || null;
 
   return { props: { dataArray, checklistData } };
 }
