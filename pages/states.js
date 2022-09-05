@@ -147,7 +147,12 @@ export default function States({ stateData }) {
     </>
   );
 }
-
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: false, // can also be true or 'blocking'
+  };
+}
 export async function getStaticProps() {
   let statesUrl =
     process.env.ENVIRONMENT === "dev"
@@ -155,7 +160,7 @@ export async function getStaticProps() {
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/states";
   const statesRes = await fetch(statesUrl);
   const statesBody = await statesRes.json();
-  let stateData = statesBody || null;
+  let stateData = statesBody;
 
   // Props returned will be passed to the page component
   return { props: { stateData } };

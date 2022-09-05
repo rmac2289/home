@@ -82,7 +82,7 @@ export async function getStaticProps() {
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
   const checklistRes = await fetch(checklistUrl);
   const checklistBody = await checklistRes.json();
-  let checklistData = checklistBody || null;
+  let checklistData = checklistBody;
 
   let url =
     process.env.ENVIRONMENT === "dev"
@@ -90,7 +90,7 @@ export async function getStaticProps() {
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
   const res = await fetch(url);
   const body = await res.json();
-  let dataArray = body || null;
+  let dataArray = body;
 
   return { props: { dataArray, checklistData } };
 }

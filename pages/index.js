@@ -22,7 +22,12 @@ export default function Home({ dataArray }) {
     </div>
   );
 }
-
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: false, // can also be true or 'blocking'
+  };
+}
 export async function getStaticProps() {
   let url =
     process.env.ENVIRONMENT === "dev"
@@ -30,7 +35,7 @@ export async function getStaticProps() {
       : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
   const res = await fetch(url);
   const body = await res.json();
-  let dataArray = body || null;
+  let dataArray = body;
 
   return { props: { dataArray } };
 }
