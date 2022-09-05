@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import styles from "../styles/Home.module.css";
 
-export default function States({ stateData }) {
-  let oregon, washington, california;
-  washington = stateData[0].washington;
-  oregon = stateData[1].oregon;
-  california = stateData[2].california;
+export default function States({}) {
+  // let oregon, washington, california;
+  // washington = stateData[0].washington;
+  // oregon = stateData[1].oregon;
+  // california = stateData[2].california;
   return (
     <>
       <Nav />
@@ -14,7 +14,7 @@ export default function States({ stateData }) {
       <div className="container">
         <main>
           <div className="tableContainer">
-            <table>
+            {/* <table>
               <tr>
                 <th className="tableTitle">Taxes</th>
                 <th>OR</th>
@@ -90,7 +90,7 @@ export default function States({ stateData }) {
                 <td>{washington.nickname}</td>
                 <td>{california.nickname}</td>
               </tr>
-            </table>
+            </table> */}
           </div>
         </main>
       </div>
@@ -149,14 +149,14 @@ export default function States({ stateData }) {
 }
 
 export async function getStaticProps() {
-  let statesUrl =
-    process.env.ENVIRONMENT === "dev"
-      ? "http://localhost:3000/api/states"
-      : "https://gorgeous-meerkat-3dd227.netlify.app/api/states";
-  const statesRes = await fetch(statesUrl);
-  const statesBody = await statesRes.json();
-  let stateData = statesBody;
+  // let statesUrl =
+  //   process.env.ENVIRONMENT === "dev"
+  //     ? "http://localhost:3000/api/states"
+  //     : "https://gorgeous-meerkat-3dd227.netlify.app/api/states";
+  // const statesRes = await fetch(statesUrl);
+  // const statesBody = await statesRes.json();
+  // let stateData = statesBody;
 
   // Props returned will be passed to the page component
-  return { props: { stateData } };
+  return { props: {} };
 }
