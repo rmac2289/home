@@ -4,7 +4,7 @@ import { Checklist } from "./Checklist";
 import Stats from "./Stats";
 import Weather from "./Weather";
 
-export default function Cities({ dataArray, checklistData }) {
+export default function Cities({ dataArray }) {
   return (
     <>
       <div className="citiesContainer">
@@ -12,7 +12,7 @@ export default function Cities({ dataArray, checklistData }) {
           return (
             <div key={index} className="city">
               <div>
-                <Link href={`/${city.cityName}`}>
+                <Link href={`/${city.cityName}` || ""}>
                   <a>
                     <h2 className="cityName">
                       {city.cityName}, {city.state}

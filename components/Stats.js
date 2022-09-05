@@ -20,7 +20,7 @@ export default function Stats({
           <strong>Population: </strong>
           <span>{population}</span>
         </p>
-        <Link href={housingLink}>
+        <Link href={housingLink || ""}>
           <a target="_blank">
             <p>
               <strong>Median Home Price: </strong>
@@ -34,7 +34,7 @@ export default function Stats({
             {closestAirport}, {timeToAirport} drive
           </span>
         </p>
-        <Link href={schoolLink}>
+        <Link href={schoolLink || ""}>
           <a target="_blank">
             <p>
               <strong>Schools: </strong>
@@ -42,7 +42,7 @@ export default function Stats({
             </p>
           </a>
         </Link>
-        <Link href={rainLink}>
+        <Link href={rainLink || ""}>
           <a target="_blank">
             <p>
               <strong>Rainy Days: </strong>
@@ -50,7 +50,7 @@ export default function Stats({
             </p>
           </a>
         </Link>
-        <Link href={costOfLivingLink}>
+        <Link href={costOfLivingLink || ""}>
           <a target="_blank">
             <p>
               <strong>Cost of Living: </strong>
