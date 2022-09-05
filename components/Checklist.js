@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const Checklist = ({ checklistData, currentCity }) => {
   // const [showChecklist, setShowChecklist] = useState(false);
   // const toggleChecklist = () => {
