@@ -76,21 +76,21 @@ export async function getStaticPaths() {
   };
 }
 export async function getStaticProps() {
-  let checklistUrl =
-    process.env.ENVIRONMENT === "dev"
-      ? "http://localhost:3000/api/checklist"
-      : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
-  const checklistRes = await fetch(checklistUrl);
-  const checklistBody = await checklistRes.json();
-  let checklistData = checklistBody;
+  //   let checklistUrl =
+  //     process.env.ENVIRONMENT === "dev"
+  //       ? "http://localhost:3000/api/checklist"
+  //       : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
+  //   const checklistRes = await fetch(checklistUrl);
+  //   const checklistBody = await checklistRes.json();
+  //   let checklistData = checklistBody;
 
-  let url =
-    process.env.ENVIRONMENT === "dev"
-      ? "http://localhost:3000/api/data"
-      : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
-  const res = await fetch(url);
-  const body = await res.json();
-  let dataArray = body;
+  //   let url =
+  //     process.env.ENVIRONMENT === "dev"
+  //       ? "http://localhost:3000/api/data"
+  //       : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
+  //   const res = await fetch(url);
+  //   const body = await res.json();
+  //   let dataArray = body;
 
   return { props: { dataArray, checklistData } };
 }

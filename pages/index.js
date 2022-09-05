@@ -5,7 +5,7 @@ import * as cheerio from "cheerio";
 import Cities from "../components/Cities";
 import Nav from "../components/Nav";
 
-export default function Home({ dataArray, checklistData }) {
+export default function Home({ dataArray }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -34,13 +34,5 @@ export async function getStaticProps() {
   const body = await res.json();
   let dataArray = body;
 
-  let checklistUrl =
-    process.env.ENVIRONMENT === "dev"
-      ? "http://localhost:3000/api/checklist"
-      : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
-  const checklistRes = await fetch(checklistUrl);
-  const checklistBody = await checklistRes.json();
-  let checklistData = checklistBody;
-
-  return { props: { dataArray, checklistData } };
+  return { props: { dataArray } };
 }
