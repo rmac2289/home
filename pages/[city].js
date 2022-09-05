@@ -92,5 +92,5 @@ export async function getStaticProps() {
   const body = await res.json();
   let dataArray = body;
 
-  return { props: { dataArray, checklistData } };
+  return { props: { dataArray } };
 }
