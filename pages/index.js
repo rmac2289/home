@@ -3,7 +3,7 @@ import styles from "../styles/Home.module.css";
 import Cities from "../components/Cities";
 import Nav from "../components/Nav";
 
-export default function Home({ dataArray }) {
+export default function Home({ dataArray = null }) {
   return (
     <div className={styles.container}>
       <Head>

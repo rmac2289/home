@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import styles from "../styles/Home.module.css";
 
-export default function States({ stateData }) {
+export default function States({ stateData = null }) {
   let oregon, washington, california;
   washington = stateData[0].washington;
   oregon = stateData[1].oregon;
