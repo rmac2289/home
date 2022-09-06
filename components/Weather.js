@@ -1,107 +1,152 @@
 import { useState } from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+} from "chart.js";
+import { Line, Bar } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement
+);
+
+export const options = {
+  responsive: true,
+  scales: {
+    x: {
+      ticks: {
+        color: "white",
+      },
+    },
+    y: {
+      ticks: {
+        color: "orange",
+      },
+    },
+  },
+
+  plugins: {
+    legend: {
+      position: "top",
+      align: "left",
+      labels: { padding: 15, color: "white" },
+    },
+  },
+};
 
 export default function Weather({ weather }) {
   const [showWeather, setShowWeather] = useState(false);
+
   const toggleWeather = () => {
     setShowWeather(!showWeather);
   };
+  let avgLows = [];
+  let avgHighs = [];
+  let labels = [];
+  let hotDays = [];
+  let coldDays = [];
+  let rainyDays = [];
+  let snowyDays = [];
+  weather.map((month) => {
+    avgHighs.push(month.high);
+    avgLows.push(month.low);
+    let monthName = month.month;
+    labels.push(monthName);
+    hotDays.push(month.hotDays);
+    rainyDays.push(month.rainyDays);
+    coldDays.push(month.freezingDays);
+    snowyDays.push(month.snowyDays);
+  });
+  const barData = {
+    labels,
+    datasets: [
+      {
+        label: "hot",
+        data: hotDays,
+        backgroundColor: "orange",
+        borderColor: "orange",
+      },
+      {
+        label: "rainy",
+        data: rainyDays,
+        backgroundColor: "skyblue",
+        borderColor: "skyblue",
+      },
+      {
+        label: "freezing",
+        data: coldDays,
+        backgroundColor: "purple",
+        borderColor: "purple",
+      },
+      {
+        label: "snowy",
+        data: snowyDays,
+        backgroundColor: "white",
+        borderColor: "white",
+      },
+    ],
+  };
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "High",
+        data: avgHighs,
+        backgroundColor: "orange",
+        borderColor: "orange",
+      },
+      {
+        label: "Low",
+        data: avgLows,
+        backgroundColor: "skyblue",
+        borderColor: "skyblue",
+      },
+    ],
+  };
   return (
     <>
-      <div onClick={toggleWeather}>
-        <h4>Weather by month</h4>
+      <div className="chartsHeader">
+        <h2>Weather by Month</h2>
+        <div className="lineContainer">
+          <Line color="white" options={options} data={data} />
+        </div>
+        <div className="barContainer">
+          <Bar options={options} data={barData} />
+        </div>
       </div>
-      <table>
-        <tbody>
-          <tr>
-            <th></th>
-            <th>Avg High</th>
-            <th>Avg Low</th>
-            <th>Hot Days</th>
-            <th>Freezing Days</th>
-            <th>Rainy Days</th>
-            <th>Snowy Days</th>
-          </tr>
-          {weather.map((month) => {
-            return (
-              <tr>
-                <td>{month.month}</td>
-                <td>{month.high}°</td>
-                <td>{month.low}°</td>
-                <td>{month.hotDays}</td>
-                <td>{month.freezingDays}</td>
-                <td>{month.rainyDays}</td>
-                <td>{month.snowyDays}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
 
       <style jsx>{`
-        .tableTitle {
-          border-top: none;
-          border-left: none;
-          color: white;
-          font-size: 22px;
-          text-align: left;
-        }
-        tbody {
-          display: table;
+        .lineContainer,
+        .barContainer {
           width: 100%;
+          padding: 1rem;
         }
-        .rowTitle {
-          text-align: left;
-          width: 200px;
+
+        .chartsHeader h2 {
+          color: orange;
+          padding: 1rem;
         }
+
         h4 {
           color: orange;
           text-decoration: underline;
         }
-        div {
-          cursor: pointer;
-        }
+
         h4:hover {
           color: #ffd700;
-        }
-        .tableContainer {
-          padding: 1rem;
-          border: 1px solid white;
-          border-radius: 10px;
-          margin-bottom: 20px;
-        }
-        table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
-          display: ${showWeather ? "flex" : "none"};
-          justify-content: center;
-          animation: rotateMenu 0.25s linear;
-        }
-        @keyframes rotateMenu {
-          0% {
-            opacity: 0;
-          }
-          70% {
-            opacity: 0.7;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-
-        tr {
-          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        td,
-        th {
-          text-align: center;
-          padding: 8px;
-        }
-        td:first-child {
-          text-align: left;
-        }
-        th {
-          color: orange;
         }
       `}</style>
     </>

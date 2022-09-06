@@ -44,13 +44,21 @@ export default function Nav() {
           align-items: center;
         }
         #states {
-          color: ${route === "/states" && "grey"};
+          color: ${route === "/states" && "orange"};
         }
         #home {
-          color: ${route === "/" && "grey"};
+          color: ${route === "/" && "orange"};
         }
         a:hover {
           text-decoration: underline;
+        }
+        #states:hover {
+          text-decoration: ${route === "/states" ? "none" : "underline"};
+          cursor: ${route === "/states" ? "inherit" : "pointer"};
+        }
+        #home:hover {
+          text-decoration: ${route === "/" ? "none" : "underline"};
+          cursor: ${route === "/" ? "inherit" : "pointer"};
         }
       `}</style>
     </>

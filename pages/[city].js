@@ -9,6 +9,7 @@ export default function City({ checklistData, dataArray }) {
   const weather = dataArray.filter((city) => city.cityName === currentCity);
   console.log(weather);
   let data = checklistData;
+
   return (
     <>
       <Nav />
@@ -20,7 +21,7 @@ export default function City({ checklistData, dataArray }) {
           <section>
             <Checklist checklistData={data} currentCity={currentCity} />
           </section>
-          <section>
+          <section className="weatherContainer">
             <Weather weather={weather[0].weather} />
           </section>
         </main>
@@ -51,6 +52,10 @@ export default function City({ checklistData, dataArray }) {
             border-radius: 10px;
             margin: 1rem;
             padding: 1rem;
+          }
+          .weatherContainer {
+            border: none;
+            padding: 0;
           }
         `}
       </style>
