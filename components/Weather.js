@@ -33,7 +33,7 @@ export const options = {
     },
     y: {
       ticks: {
-        color: "orange",
+        color: "white",
       },
     },
   },
@@ -48,11 +48,6 @@ export const options = {
 };
 
 export default function Weather({ weather }) {
-  const [showWeather, setShowWeather] = useState(false);
-
-  const toggleWeather = () => {
-    setShowWeather(!showWeather);
-  };
   let avgLows = [];
   let avgHighs = [];
   let labels = [];
@@ -74,19 +69,19 @@ export default function Weather({ weather }) {
     labels,
     datasets: [
       {
-        label: "hot",
+        label: "+90˚ days",
         data: hotDays,
         backgroundColor: "orange",
         borderColor: "orange",
       },
       {
-        label: "rainy",
+        label: "rainy days",
         data: rainyDays,
         backgroundColor: "skyblue",
         borderColor: "skyblue",
       },
       {
-        label: "freezing",
+        label: "-32˚ days",
         data: coldDays,
         backgroundColor: "purple",
         borderColor: "purple",

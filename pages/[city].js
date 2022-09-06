@@ -31,10 +31,14 @@ export default function City({ checklistData, dataArray }) {
           .container {
             padding: 1rem;
           }
+          header {
+            margin: 1rem;
+          }
           h1 {
-            text-align: center;
+            text-align: left;
             color: orange;
             font-size: 42px;
+            padding: 1rem;
           }
           main {
             min-width: 400px;
