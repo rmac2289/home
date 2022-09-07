@@ -1,3 +1,5 @@
+import Notes from "./Notes";
+
 export const Checklist = ({ checklistData, currentCity }) => {
   // const [showChecklist, setShowChecklist] = useState(false);
   // const toggleChecklist = () => {
@@ -21,31 +23,17 @@ export const Checklist = ({ checklistData, currentCity }) => {
             );
           }
         })}
-        <form className="notes">
+        <div className="notes">
           <div className="notesTitle">
             <h3>Notes</h3>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                console.log("clicked");
-              }}
-              type="submit"
-            >
-              save
-            </button>
+            <Notes />
           </div>
-
-          <textarea />
-        </form>
+        </div>
       </div>
 
       <style>
         {`
-        .notesTitle {
-          display: flex;
-          align-items: center;
-          justify-content: space-between
-        }
+        
         button {
           height: 25px;
           border-radius: 10px;

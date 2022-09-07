@@ -9,13 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/css": "^11.10.0",
     "chart.js": "^3.9.1",
     "cheerio": "^1.0.0-rc.12",
+    "draft-js": "^0.11.7",
     "mongodb": "^4.9.1",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-chartjs-2": "^4.3.1",
     "react-dom": "18.2.0",
+    "slate": "^0.82.1",
+    "slate-history": "^0.66.0",
+    "slate-react": "^0.82.1",
     "styled-jsx": "^5.0.4"
   },
   "devDependencies": {
