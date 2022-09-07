@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -87,7 +86,7 @@ export default function Weather({ weather }) {
         borderColor: "purple",
       },
       {
-        label: "snowy",
+        label: "snowy days",
         data: snowyDays,
         backgroundColor: "white",
         borderColor: "white",
@@ -98,13 +97,13 @@ export default function Weather({ weather }) {
     labels,
     datasets: [
       {
-        label: "High",
+        label: "high",
         data: avgHighs,
         backgroundColor: "orange",
         borderColor: "orange",
       },
       {
-        label: "Low",
+        label: "low",
         data: avgLows,
         backgroundColor: "skyblue",
         borderColor: "skyblue",

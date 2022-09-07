@@ -9,6 +9,7 @@ export const Checklist = ({ checklistData, currentCity }) => {
   return (
     <>
       <div className="inputGroup">
+        <h2>Places to go</h2>
         {items.map((item, index) => {
           if (item !== "_id" && item !== "city") {
             return (
@@ -20,10 +21,52 @@ export const Checklist = ({ checklistData, currentCity }) => {
             );
           }
         })}
+        <form className="notes">
+          <div className="notesTitle">
+            <h3>Notes</h3>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                console.log("clicked");
+              }}
+              type="submit"
+            >
+              save
+            </button>
+          </div>
+
+          <textarea />
+        </form>
       </div>
 
       <style>
         {`
+        .notesTitle {
+          display: flex;
+          align-items: center;
+          justify-content: space-between
+        }
+        button {
+          height: 25px;
+          border-radius: 10px;
+          border: none;
+          outline: none;
+          width: 50px;
+          background: orange;
+          
+        }
+        .notes {
+          padding: .5rem;
+        }
+        textarea {
+          width: 100%;
+          min-height: 100px;
+          padding: .5rem;
+          border: none;
+          outline: none;
+          opacity: 0.9;
+          border-radius: 10px;
+        }
         .inputGroup {
             display: flex;
             flex-direction: column;
@@ -31,6 +74,11 @@ export const Checklist = ({ checklistData, currentCity }) => {
         .checklistItem {
           padding: .5rem;
         }
+        h2 {
+          padding: .5rem;
+          color: orange;
+        }
+       
         
           
   
