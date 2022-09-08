@@ -1,44 +1,39 @@
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Focus from "@tiptap/extension-focus";
+import Underline from "@tiptap/extension-underline";
 import React, { useState } from "react";
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
     return null;
   }
-
   return (
-    <>
+    <div className="textMenu">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive("bold") ? "is-active" : ""}
       >
-        bold
+        <strong>B</strong>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={editor.isActive("italic") ? "is-active" : ""}
       >
-        italic
+        <em>I</em>
       </button>
+
       <button
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        className={editor.isActive("strike") ? "is-active" : ""}
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        className={editor.isActive("underline") ? "is-active" : ""}
       >
-        strike
+        <p style={{ padding: 0, margin: 0, textDecoration: "underline" }}>U</p>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCode().run()}
         className={editor.isActive("code") ? "is-active" : ""}
       >
-        code
-      </button>
-      <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-        clear marks
-      </button>
-      <button onClick={() => editor.chain().focus().clearNodes().run()}>
-        clear nodes
+        {"{ }"}
       </button>
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
@@ -92,36 +87,29 @@ const MenuBar = ({ editor }) => {
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive("orderedList") ? "is-active" : ""}
       >
-        ordered list
+        # list
       </button>
-      <button
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive("codeBlock") ? "is-active" : ""}
-      >
-        code block
-      </button>
+
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive("blockquote") ? "is-active" : ""}
       >
-        blockquote
+        " "
       </button>
       <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-        horizontal rule
+        divider
       </button>
-      <button onClick={() => editor.chain().focus().setHardBreak().run()}>
-        hard break
-      </button>
-      <button onClick={() => editor.chain().focus().undo().run()}>undo</button>
-      <button onClick={() => editor.chain().focus().redo().run()}>redo</button>
-    </>
+      <button onClick={() => editor.chain().focus().undo().run()}>↩</button>
+      <button onClick={() => editor.chain().focus().redo().run()}>↪</button>
+    </div>
   );
 };
 
 export default () => {
   const [editorContent, setEditorContent] = useState("");
+
   const editor = useEditor({
-    extensions: [StarterKit, Focus],
+    extensions: [StarterKit, Focus, Underline],
     onUpdate: ({ editor }) => {
       setEditorContent(editor.getJSON());
     },

@@ -37,7 +37,16 @@ export const Checklist = ({ checklistData, currentCity }) => {
         .ProseMirror:focus {
           outline: none;
       }
-      p {
+      .textMenu {
+        border: 1px solid white;
+        border-radius: 5px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: .25rem;
+        
+      }
+      p,h1,h2,h3,h4,h5,h6 {
         margin-top: 0;
       }
         .notes {
@@ -59,10 +68,30 @@ export const Checklist = ({ checklistData, currentCity }) => {
         .checklistItem {
           padding: .5rem;
         }
+        button {
+          background: black;
+          color: white;
+          outline: none;
+          border: none;
+          margin: 2px;
+          border-radius: 3px;
+          font-size: 14px;
+        }
+        button:hover {
+          background: rgba(255,255,255,0.4)
+        }
+        .is-active {
+          background: white;
+          color: black;
+        }
         h2 {
           padding: .5rem;
           color: orange;
         }
+       ul, ol {
+        padding-left: 20px;
+        margin-top: .5em;
+       }
        
         
           
