@@ -34,15 +34,12 @@ export const Checklist = ({ checklistData, currentCity }) => {
       <style>
         {`
         
-        button {
-          height: 25px;
-          border-radius: 10px;
-          border: none;
+        .ProseMirror:focus {
           outline: none;
-          width: 50px;
-          background: orange;
-          
-        }
+      }
+      p {
+        margin-top: 0;
+      }
         .notes {
           padding: .5rem;
         }
