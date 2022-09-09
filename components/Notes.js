@@ -2,7 +2,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Focus from "@tiptap/extension-focus";
 import Underline from "@tiptap/extension-underline";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -105,10 +105,11 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export default () => {
+export default ({ canEditNotes }) => {
   const [editorContent, setEditorContent] = useState("");
-
+  console.log(canEditNotes);
   const editor = useEditor({
+    editable: canEditNotes,
     extensions: [StarterKit, Focus, Underline],
     onUpdate: ({ editor }) => {
       setEditorContent(editor.getJSON());
@@ -116,18 +117,24 @@ export default () => {
     autofocus: false,
     content: editorContent,
   });
+  useEffect(() => {
+    if (!editor) {
+      return undefined;
+    }
 
+    editor.setEditable(canEditNotes);
+  }, [editor, canEditNotes]);
   return (
     <div>
-      <MenuBar editor={editor} />
+      {canEditNotes && <MenuBar editor={editor} />}
       <EditorContent
         style={{
-          border: "1px solid white",
+          border: canEditNotes ? "1px solid white" : "1px solid black",
           borderRadius: "5px",
           marginTop: ".5rem",
           minHeight: "200px",
-          background: "white",
-          color: "black",
+          background: canEditNotes ? "white" : "black",
+          color: canEditNotes ? "black" : "white",
           padding: "5px",
         }}
         editor={editor}

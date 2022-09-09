@@ -1,10 +1,11 @@
 import Notes from "./Notes";
+import { useState } from "react";
 
 export const Checklist = ({ checklistData, currentCity }) => {
-  // const [showChecklist, setShowChecklist] = useState(false);
-  // const toggleChecklist = () => {
-  //   setShowChecklist(!showChecklist);
-  // };
+  const [canEditNotes, setCanEditNotes] = useState(false);
+  const toggleCanEditNotes = () => {
+    setCanEditNotes(!canEditNotes);
+  };
   let city = checklistData.filter((city) => city.city === currentCity);
   // add on change for updating db
   let items = Object.keys(city[0]);
@@ -25,15 +26,26 @@ export const Checklist = ({ checklistData, currentCity }) => {
         })}
         <div className="notes">
           <div className="notesTitle">
-            <h3>Notes</h3>
-            <Notes />
+            <div className="notesHeader">
+              <h3 style={{ marginTop: "1rem", marginRight: "5px" }}>Notes</h3>
+              <button
+                onClick={toggleCanEditNotes}
+                style={{ background: "transparent", color: "black" }}
+              >
+                ✏️
+              </button>
+            </div>
+            <Notes canEditNotes={canEditNotes} />
           </div>
         </div>
       </div>
 
       <style>
         {`
-        
+        .notesHeader {
+          display: flex;
+          align-items: center;
+        }
         .ProseMirror:focus {
           outline: none;
       }
