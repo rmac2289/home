@@ -6,16 +6,20 @@ const uri = `mongodb+srv://${user}:${pw}${db_string}`;
 const client = new MongoClient(uri);
 
 export default async function handler(req, res) {
+  await client.connect();
+  console.log("mongodb connected");
+  let db = client.db("home");
+  let collection = db.collection("notes");
+
   if (req.method === "GET") {
-    await client.connect();
-    console.log("mongodb connected");
-    let db = client.db("home");
-    // let collection = db.collection("notes");
-    // let stateData = await collection.find({}).toArray();
-    client.close();
-    res.status(200);
+    let notes = await collection.find({}).toArray();
+    res.status(200).json(notes);
   }
-  if (req.method === "POST") {
-    res.status(201);
+  if (req.method === "PATCH") {
+    collection.updateOne(
+      { city: req.body.city },
+      { $set: { content: req.body.content } }
+    );
+    res.status(201).json({ message: `${req.body.city} updated.` });
   }
 }

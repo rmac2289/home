@@ -3,11 +3,12 @@ import { Checklist } from "../components/Checklist";
 import Nav from "../components/Nav";
 import Weather from "../components/Weather";
 
-export default function City({ checklistData, dataArray }) {
+export default function City({ checklistData, dataArray, notes }) {
   const router = useRouter();
   const currentCity = router.query.city;
   const weather = dataArray.filter((city) => city.cityName === currentCity);
-  console.log(weather);
+  const note = notes.filter((city) => city.city === currentCity.toLowerCase());
+  console.log(note);
   let data = checklistData;
 
   return (
@@ -19,7 +20,11 @@ export default function City({ checklistData, dataArray }) {
         </header>
         <main>
           <section>
-            <Checklist checklistData={data} currentCity={currentCity} />
+            <Checklist
+              checklistData={data}
+              currentCity={currentCity}
+              notes={note}
+            />
           </section>
           <section className="weatherContainer">
             <Weather weather={weather[0].weather} />
@@ -99,5 +104,13 @@ export async function getStaticProps() {
   const body = await res.json();
   let dataArray = body;
 
-  return { props: { dataArray, checklistData } };
+  let notesUrl =
+    process.env.ENVIRONMENT === "dev"
+      ? "http://localhost:3000/api/notes"
+      : "https://gorgeous-meerkat-3dd227.netlify.app/api/notes";
+  const notesRes = await fetch(notesUrl);
+  const notesBody = await notesRes.json();
+  let notes = notesBody;
+
+  return { props: { dataArray, checklistData, notes } };
 }

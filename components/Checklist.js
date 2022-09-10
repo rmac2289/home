@@ -1,7 +1,7 @@
 import Notes from "./Notes";
 import { useState } from "react";
 
-export const Checklist = ({ checklistData, currentCity }) => {
+export const Checklist = ({ checklistData, currentCity, notes }) => {
   const [canEditNotes, setCanEditNotes] = useState(false);
   const toggleCanEditNotes = () => {
     setCanEditNotes(!canEditNotes);
@@ -35,7 +35,12 @@ export const Checklist = ({ checklistData, currentCity }) => {
                 ✏️
               </button>
             </div>
-            <Notes canEditNotes={canEditNotes} />
+            <Notes
+              canEditNotes={canEditNotes}
+              notes={notes}
+              city={currentCity}
+              setCanEditNotes={setCanEditNotes}
+            />
           </div>
         </div>
       </div>

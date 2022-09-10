@@ -105,9 +105,13 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export default ({ canEditNotes }) => {
-  const [editorContent, setEditorContent] = useState("");
-  console.log(canEditNotes);
+export default ({ canEditNotes, setCanEditNotes, notes, city }) => {
+  let noteContent = notes[0].content;
+  const [editorContent, setEditorContent] = useState({
+    content: noteContent,
+    type: "doc",
+  });
+
   const editor = useEditor({
     editable: canEditNotes,
     extensions: [StarterKit, Focus, Underline],
@@ -117,13 +121,33 @@ export default ({ canEditNotes }) => {
     autofocus: false,
     content: editorContent,
   });
+
   useEffect(() => {
     if (!editor) {
       return undefined;
     }
-
+    setEditorContent(notes[0].content);
     editor.setEditable(canEditNotes);
-  }, [editor, canEditNotes]);
+  }, [editor, canEditNotes, notes]);
+
+  const saveNotes = (content) => {
+    let url = "http://localhost:3000/api/notes";
+    fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        city: city.toLowerCase(),
+        content: content,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => result)
+      .catch((err) => console.log("error: ", err));
+
+    setCanEditNotes(false);
+  };
   return (
     <div>
       {canEditNotes && <MenuBar editor={editor} />}
@@ -139,6 +163,9 @@ export default ({ canEditNotes }) => {
         }}
         editor={editor}
       />
+      {canEditNotes && (
+        <button onClick={() => saveNotes(editorContent.content)}>save</button>
+      )}
     </div>
   );
 };
