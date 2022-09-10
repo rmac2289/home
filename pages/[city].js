@@ -3,7 +3,7 @@ import { Checklist } from "../components/Checklist";
 import Nav from "../components/Nav";
 import Weather from "../components/Weather";
 
-export default function City({ checklistData, dataArray, notes }) {
+export default function City({ checklistData, dataArray, notes, isDevEnv }) {
   const router = useRouter();
   const currentCity = router.query.city;
   const weather = dataArray.filter((city) => city.cityName === currentCity);
@@ -24,6 +24,7 @@ export default function City({ checklistData, dataArray, notes }) {
               checklistData={data}
               currentCity={currentCity}
               notes={note}
+              isDevEnv={isDevEnv}
             />
           </section>
           <section className="weatherContainer">
@@ -111,6 +112,7 @@ export async function getStaticProps() {
   const notesRes = await fetch(notesUrl);
   const notesBody = await notesRes.json();
   let notes = notesBody;
+  let isDevEnv = process.env.ENVIRONMENT === "dev";
 
-  return { props: { dataArray, checklistData, notes } };
+  return { props: { dataArray, checklistData, notes, isDevEnv } };
 }

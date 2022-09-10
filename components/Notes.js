@@ -105,7 +105,7 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export default ({ canEditNotes, setCanEditNotes, notes, city }) => {
+export default ({ canEditNotes, setCanEditNotes, notes, city, isDevEnv }) => {
   let noteContent = notes[0].content;
   const [editorContent, setEditorContent] = useState({
     content: noteContent,
@@ -131,8 +131,9 @@ export default ({ canEditNotes, setCanEditNotes, notes, city }) => {
   }, [editor, canEditNotes, notes]);
 
   const saveNotes = (content) => {
-    let url =
-      `${process.env.API_URL}/notes` || "http://localhost:3000/api/notes";
+    let url = isDevEnv
+      ? "http://localhost:3000/api/notes"
+      : "https://gorgeous-meerkat-3dd227.netlify.app/api/notes";
     fetch(url, {
       method: "PATCH",
       headers: {
