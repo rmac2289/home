@@ -106,23 +106,27 @@ const MenuBar = ({ editor }) => {
 };
 
 export default ({ canEditNotes, setCanEditNotes, city, isDevEnv, notes }) => {
-  // FIGURE OUT HOW TO GET FETCHED DATA TO INITIALLY LOAD
   let notesContent = notes.filter((note) => note.city === city.toLowerCase());
   const [editorContent, setEditorContent] = useState({
     content: notesContent[0].content,
     type: "doc",
   });
-
   const editor = useEditor({
     editable: canEditNotes,
     extensions: [StarterKit, Focus, Underline],
     onUpdate: ({ editor }) => {
       setEditorContent(editor.getJSON());
     },
-    autofocus: false,
     content: editorContent,
   });
-
+  useEffect(() => {
+    if (!editor) {
+      return undefined;
+    }
+    if (canEditNotes === true) {
+      editor.setEditable(true);
+    }
+  }, [editor, canEditNotes]);
   const saveNotes = (content) => {
     let url = isDevEnv
       ? "http://localhost:3000/api/notes"
@@ -146,7 +150,6 @@ export default ({ canEditNotes, setCanEditNotes, city, isDevEnv, notes }) => {
   if (notes == null) {
     return <div>loading...</div>;
   }
-  console.log(editor);
   return (
     <div>
       {canEditNotes && <MenuBar editor={editor} />}
@@ -163,7 +166,12 @@ export default ({ canEditNotes, setCanEditNotes, city, isDevEnv, notes }) => {
         editor={editor}
       />
       {canEditNotes && (
-        <button onClick={() => saveNotes(editorContent.content)}>save</button>
+        <button
+          style={{ background: "white", color: "black" }}
+          onClick={() => saveNotes(editorContent.content)}
+        >
+          save
+        </button>
       )}
     </div>
   );

@@ -3,26 +3,11 @@ import { useState, useEffect } from "react";
 
 export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
   const [canEditNotes, setCanEditNotes] = useState(false);
-  // const [notes, setNotes] = useState(null);
   const toggleCanEditNotes = () => {
     setCanEditNotes(!canEditNotes);
   };
-  // useEffect(() => {
-  //   let notesUrl = isDevEnv
-  //     ? "http://localhost:3000/api/notes"
-  //     : "https://gorgeous-meerkat-3dd227.netlify.app/api/notes";
-  //   fetch(notesUrl)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       let cityNotes = data.filter(
-  //         (item) => item.city === currentCity.toLowerCase()
-  //       );
-  //       setNotes({ type: "doc", content: cityNotes[0].content });
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, []);
+
   let city = checklistData.filter((city) => city.city === currentCity);
-  // add on change for updating db
   let items = Object.keys(city[0]);
   return (
     <>
@@ -45,9 +30,9 @@ export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
               <h3 style={{ marginTop: "1rem", marginRight: "5px" }}>Notes</h3>
               <button
                 onClick={toggleCanEditNotes}
-                style={{ background: "transparent", color: "black" }}
+                style={{ background: "white", color: "black" }}
               >
-                ✏️
+                {canEditNotes ? "Cancel" : "Edit"}
               </button>
             </div>
             <Notes
@@ -66,6 +51,7 @@ export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
         .notesHeader {
           display: flex;
           align-items: center;
+          justify-content: space-between;
         }
         .ProseMirror:focus {
           outline: none;
