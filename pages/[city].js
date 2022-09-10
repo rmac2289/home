@@ -89,30 +89,28 @@ export async function getStaticPaths() {
   };
 }
 export async function getStaticProps() {
-  let checklistUrl =
-    process.env.ENVIRONMENT === "dev"
-      ? "http://localhost:3000/api/checklist"
-      : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
+  let isDevEnv = process.env.ENVIRONMENT === "dev";
+
+  let checklistUrl = isDevEnv
+    ? "http://localhost:3000/api/checklist"
+    : "https://gorgeous-meerkat-3dd227.netlify.app/api/checklist";
   const checklistRes = await fetch(checklistUrl);
   const checklistBody = await checklistRes.json();
   let checklistData = checklistBody;
 
-  let url =
-    process.env.ENVIRONMENT === "dev"
-      ? "http://localhost:3000/api/data"
-      : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
+  let url = isDevEnv
+    ? "http://localhost:3000/api/data"
+    : "https://gorgeous-meerkat-3dd227.netlify.app/api/data";
   const res = await fetch(url);
   const body = await res.json();
   let dataArray = body;
 
-  let notesUrl =
-    process.env.ENVIRONMENT === "dev"
-      ? "http://localhost:3000/api/notes"
-      : "https://gorgeous-meerkat-3dd227.netlify.app/api/notes";
+  let notesUrl = isDevEnv
+    ? "http://localhost:3000/api/notes"
+    : "https://gorgeous-meerkat-3dd227.netlify.app/api/notes";
   const notesRes = await fetch(notesUrl);
   const notesBody = await notesRes.json();
   let notes = notesBody;
-  let isDevEnv = process.env.ENVIRONMENT === "dev";
 
   return { props: { dataArray, checklistData, notes, isDevEnv } };
 }

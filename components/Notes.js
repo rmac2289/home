@@ -111,6 +111,7 @@ export default ({ canEditNotes, setCanEditNotes, notes, city, isDevEnv }) => {
     content: noteContent,
     type: "doc",
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   const editor = useEditor({
     editable: canEditNotes,
@@ -128,6 +129,7 @@ export default ({ canEditNotes, setCanEditNotes, notes, city, isDevEnv }) => {
     }
     setEditorContent(notes[0].content);
     editor.setEditable(canEditNotes);
+    setIsLoading(false);
   }, [editor, canEditNotes, notes]);
 
   const saveNotes = (content) => {
@@ -150,6 +152,9 @@ export default ({ canEditNotes, setCanEditNotes, notes, city, isDevEnv }) => {
 
     setCanEditNotes(false);
   };
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
   return (
     <div>
       {canEditNotes && <MenuBar editor={editor} />}
