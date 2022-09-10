@@ -131,7 +131,8 @@ export default ({ canEditNotes, setCanEditNotes, notes, city }) => {
   }, [editor, canEditNotes, notes]);
 
   const saveNotes = (content) => {
-    let url = "http://localhost:3000/api/notes";
+    let url =
+      `${process.env.API_URL}/notes` || "http://localhost:3000/api/notes";
     fetch(url, {
       method: "PATCH",
       headers: {
