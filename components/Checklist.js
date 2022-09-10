@@ -1,11 +1,26 @@
 import Notes from "./Notes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export const Checklist = ({ checklistData, currentCity, notes, isDevEnv }) => {
+export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
   const [canEditNotes, setCanEditNotes] = useState(false);
+  // const [notes, setNotes] = useState(null);
   const toggleCanEditNotes = () => {
     setCanEditNotes(!canEditNotes);
   };
+  // useEffect(() => {
+  //   let notesUrl = isDevEnv
+  //     ? "http://localhost:3000/api/notes"
+  //     : "https://gorgeous-meerkat-3dd227.netlify.app/api/notes";
+  //   fetch(notesUrl)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       let cityNotes = data.filter(
+  //         (item) => item.city === currentCity.toLowerCase()
+  //       );
+  //       setNotes({ type: "doc", content: cityNotes[0].content });
+  //     })
+  //     .catch((err) => console.error(err));
+  // }, []);
   let city = checklistData.filter((city) => city.city === currentCity);
   // add on change for updating db
   let items = Object.keys(city[0]);
@@ -37,10 +52,10 @@ export const Checklist = ({ checklistData, currentCity, notes, isDevEnv }) => {
             </div>
             <Notes
               canEditNotes={canEditNotes}
-              notes={notes}
               city={currentCity}
               setCanEditNotes={setCanEditNotes}
               isDevEnv={isDevEnv}
+              notes={notes}
             />
           </div>
         </div>

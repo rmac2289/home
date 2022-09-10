@@ -105,13 +105,13 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export default ({ canEditNotes, setCanEditNotes, notes, city, isDevEnv }) => {
-  let noteContent = notes[0].content;
+export default ({ canEditNotes, setCanEditNotes, city, isDevEnv, notes }) => {
+  // FIGURE OUT HOW TO GET FETCHED DATA TO INITIALLY LOAD
+  let notesContent = notes.filter((note) => note.city === city.toLowerCase());
   const [editorContent, setEditorContent] = useState({
-    content: noteContent,
+    content: notesContent[0].content,
     type: "doc",
   });
-  const [isLoading, setIsLoading] = useState(true);
 
   const editor = useEditor({
     editable: canEditNotes,
@@ -122,15 +122,6 @@ export default ({ canEditNotes, setCanEditNotes, notes, city, isDevEnv }) => {
     autofocus: false,
     content: editorContent,
   });
-
-  useEffect(() => {
-    if (!editor) {
-      return undefined;
-    }
-    setEditorContent(notes[0].content);
-    editor.setEditable(canEditNotes);
-    setIsLoading(false);
-  }, [editor, canEditNotes, notes]);
 
   const saveNotes = (content) => {
     let url = isDevEnv
@@ -152,9 +143,10 @@ export default ({ canEditNotes, setCanEditNotes, notes, city, isDevEnv }) => {
 
     setCanEditNotes(false);
   };
-  if (isLoading) {
+  if (notes == null) {
     return <div>loading...</div>;
   }
+  console.log(editor);
   return (
     <div>
       {canEditNotes && <MenuBar editor={editor} />}
