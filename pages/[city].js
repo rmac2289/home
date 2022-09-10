@@ -7,8 +7,8 @@ export default function City({ checklistData, dataArray, notes }) {
   const router = useRouter();
   const currentCity = router.query.city;
   const weather = dataArray.filter((city) => city.cityName === currentCity);
-  // const note = notes.filter((city) => city.city === currentCity.toLowerCase());
-  // console.log(note);
+  const note = notes.filter((city) => city.city === currentCity.toLowerCase());
+
   let data = checklistData;
 
   return (
@@ -20,11 +20,11 @@ export default function City({ checklistData, dataArray, notes }) {
         </header>
         <main>
           <section>
-            {/* <Checklist
+            <Checklist
               checklistData={data}
               currentCity={currentCity}
               notes={note}
-            /> */}
+            />
           </section>
           <section className="weatherContainer">
             <Weather weather={weather[0].weather} />
