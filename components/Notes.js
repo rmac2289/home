@@ -155,22 +155,33 @@ export default ({ canEditNotes, setCanEditNotes, city, isDevEnv, notes }) => {
       {canEditNotes && <MenuBar editor={editor} />}
       <EditorContent
         style={{
-          border: canEditNotes ? "1px solid white" : "1px solid black",
+          border: "1px solid white",
           borderRadius: "5px",
           marginTop: ".5rem",
           minHeight: "200px",
           background: canEditNotes ? "white" : "black",
           color: canEditNotes ? "black" : "white",
-          padding: "5px",
+          padding: "1rem",
         }}
         editor={editor}
       />
       {canEditNotes && (
         <button
-          style={{ background: "white", color: "black" }}
+          style={{
+            background: "white",
+            color: "black",
+            outline: "none",
+            border: "none",
+            padding: 5,
+            marginTop: "1rem",
+            width: "60px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
           onClick={() => saveNotes(editorContent.content)}
         >
-          save
+          <div>💾</div> <div>save</div>
         </button>
       )}
     </div>

@@ -30,9 +30,9 @@ export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
               <h3 style={{ marginTop: "1rem", marginRight: "5px" }}>Notes</h3>
               <button
                 onClick={toggleCanEditNotes}
-                style={{ background: "white", color: "black" }}
+                style={{ background: "white", color: "black", padding: 5 }}
               >
-                {canEditNotes ? "Cancel" : "Edit"}
+                {canEditNotes ? "cancel" : "edit"}
               </button>
             </div>
             <Notes
@@ -55,6 +55,12 @@ export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
         }
         .ProseMirror:focus {
           outline: none;
+      }
+      .ProseMirror h2 {
+        padding: 0;
+      }
+      .ProseMirror li p, .ProseMirror h3, .ProseMirror h1 {
+        margin-bottom: 2px;
       }
       .textMenu {
         border: 1px solid white;
