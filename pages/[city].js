@@ -3,11 +3,11 @@ import { Checklist } from "../components/Checklist";
 import Nav from "../components/Nav";
 import Weather from "../components/Weather";
 
-export default function City({ checklistData, dataArray, notes = null }) {
+export default function City({ checklistData, dataArray, notes }) {
   const router = useRouter();
   const currentCity = router.query.city;
   const weather = dataArray.filter((city) => city.cityName === currentCity);
-  const note = notes.filter((city) => city.city === currentCity.toLowerCase());
+  const note = notes?.filter((city) => city.city === currentCity.toLowerCase());
   console.log(note);
   let data = checklistData;
 
