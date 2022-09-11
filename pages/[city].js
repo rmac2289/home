@@ -43,8 +43,9 @@ export default function City({ checklistData, dataArray, isDevEnv, notes }) {
           h1 {
             text-align: left;
             color: orange;
-            font-size: 42px;
+            font-size: 60px;
             padding: 1rem;
+            margin-bottom: 20px;
           }
           main {
             min-width: 400px;
@@ -112,5 +113,8 @@ export async function getStaticProps() {
   const notesBody = await notesRes.json();
   let notes = notesBody;
 
-  return { props: { dataArray, checklistData, isDevEnv, notes } };
+  return {
+    props: { dataArray, checklistData, isDevEnv, notes },
+    revalidate: 10,
+  };
 }

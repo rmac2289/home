@@ -12,7 +12,7 @@ export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
   return (
     <>
       <div className="inputGroup">
-        <h2>Places to go</h2>
+        <h2>Checklist</h2>
         {items.map((item, index) => {
           if (item !== "_id" && item !== "city") {
             return (
