@@ -115,17 +115,35 @@ export default ({
 }) => {
   let notesContent = notes.filter((note) => note.city === city.toLowerCase());
   const [editorContent, setEditorContent] = useState({
-    content: notesContent[0].content,
     type: "doc",
+    content: "",
   });
-  const editor = useEditor({
-    editable: canEditNotes,
-    extensions: [StarterKit, Focus, Underline],
-    onUpdate: ({ editor }) => {
-      setEditorContent(editor.getJSON());
-    },
-    content: editorContent,
+  const [initialContent, setInitialContent] = useState({
+    type: "doc",
+    content: notesContent[0].content,
   });
+  console.log(initialContent);
+  let editor;
+  if (editorContent.content === "") {
+    editor = useEditor({
+      editable: canEditNotes,
+      extensions: [StarterKit, Focus, Underline],
+      onUpdate: ({ editor }) => {
+        setEditorContent(editor.getJSON());
+      },
+      content: initialContent,
+    });
+  } else {
+    editor = useEditor({
+      editable: canEditNotes,
+      extensions: [StarterKit, Focus, Underline],
+      onUpdate: ({ editor }) => {
+        setEditorContent(editor.getJSON());
+      },
+      content: editorContent,
+    });
+  }
+
   useEffect(() => {
     if (!editor) {
       return undefined;
@@ -141,7 +159,7 @@ export default ({
     if (canEditNotes === true) {
       editor.setEditable(true);
     }
-  }, [editor, canEditNotes]);
+  }, [editor, canEditNotes, initialContent]);
   const saveNotes = (content) => {
     let url = isDevEnv
       ? "http://localhost:3000/api/notes"
