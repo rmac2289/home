@@ -1,7 +1,13 @@
 import Notes from "./Notes";
 import { useState, useEffect } from "react";
 
-export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
+export const Checklist = ({
+  checklistData,
+  currentCity,
+  isDevEnv,
+  notes,
+  notesUrl,
+}) => {
   const [canEditNotes, setCanEditNotes] = useState(false);
   const toggleCanEditNotes = () => {
     setCanEditNotes(!canEditNotes);
@@ -41,6 +47,7 @@ export const Checklist = ({ checklistData, currentCity, isDevEnv, notes }) => {
               setCanEditNotes={setCanEditNotes}
               isDevEnv={isDevEnv}
               notes={notes}
+              notesUrl={notesUrl}
             />
           </div>
         </div>

@@ -105,7 +105,14 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export default ({ canEditNotes, setCanEditNotes, city, isDevEnv, notes }) => {
+export default ({
+  canEditNotes,
+  setCanEditNotes,
+  city,
+  isDevEnv,
+  notes,
+  notesUrl,
+}) => {
   let notesContent = notes.filter((note) => note.city === city.toLowerCase());
   const [editorContent, setEditorContent] = useState({
     content: notesContent[0].content,
@@ -123,6 +130,14 @@ export default ({ canEditNotes, setCanEditNotes, city, isDevEnv, notes }) => {
     if (!editor) {
       return undefined;
     }
+    fetch(notesUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        let cityNotes = data.filter((item) => item.city === city.toLowerCase());
+        setEditorContent(cityNotes[0].content);
+      })
+      .catch((err) => console.error(err));
+    console.log(editorContent);
     if (canEditNotes === true) {
       editor.setEditable(true);
     }
