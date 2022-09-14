@@ -20,6 +20,6 @@ export default async function handler(req, res) {
       { city: req.body.city },
       { $set: { content: req.body.content } }
     );
-    res.status(201).json({ message: `${req.body.city} updated.` });
+    res.status(201).json(req.body);
   }
 }

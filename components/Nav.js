@@ -22,6 +22,11 @@ export default function Nav() {
             <a id="home">home</a>
           </Link>
         </div>
+        <div className="linkContainer">
+          <Link href="/compare">
+            <a id="compare">compare</a>
+          </Link>
+        </div>
       </nav>
       <style jsx>{`
         .nav {
@@ -49,6 +54,9 @@ export default function Nav() {
         #home {
           color: ${route === "/" && "orange"};
         }
+        #compare {
+          color: ${route === "/compare" && "orange"};
+        }
         a:hover {
           text-decoration: underline;
         }
@@ -59,6 +67,10 @@ export default function Nav() {
         #home:hover {
           text-decoration: ${route === "/" ? "none" : "underline"};
           cursor: ${route === "/" ? "inherit" : "pointer"};
+        }
+        #compare:hover {
+          text-decoration: ${route === "/compare" ? "none" : "underline"};
+          cursor: ${route === "/compare" ? "inherit" : "pointer"};
         }
       `}</style>
     </>

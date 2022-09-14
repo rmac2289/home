@@ -41,6 +41,7 @@ export const Checklist = ({
                 {canEditNotes ? "cancel" : "edit"}
               </button>
             </div>
+
             <Notes
               canEditNotes={canEditNotes}
               city={currentCity}

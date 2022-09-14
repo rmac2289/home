@@ -13,7 +13,6 @@ export default function City({
   const router = useRouter();
   const currentCity = router.query.city;
   const weather = dataArray.filter((city) => city.cityName === currentCity);
-  // const note = notes.filter((city) => city.city === currentCity.toLowerCase());
 
   let data = checklistData;
 

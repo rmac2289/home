@@ -12,6 +12,7 @@
     "@tiptap/extension-focus": "^2.0.0-beta.45",
     "@tiptap/extension-paragraph": "^2.0.0-beta.26",
     "@tiptap/extension-underline": "^2.0.0-beta.25",
+    "@tiptap/html": "^2.0.0-beta.194",
     "@tiptap/react": "^2.0.0-beta.115",
     "@tiptap/starter-kit": "^2.0.0-beta.192",
     "chart.js": "^3.9.1",

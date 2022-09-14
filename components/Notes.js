@@ -1,8 +1,9 @@
 import { EditorContent, useEditor } from "@tiptap/react";
+import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import Focus from "@tiptap/extension-focus";
 import Underline from "@tiptap/extension-underline";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -118,48 +119,25 @@ export default ({
     type: "doc",
     content: "",
   });
-  const [initialContent, setInitialContent] = useState({
-    type: "doc",
-    content: notesContent[0].content,
-  });
-  console.log(initialContent);
-  let editor;
-  if (editorContent.content === "") {
-    editor = useEditor({
-      editable: canEditNotes,
-      extensions: [StarterKit, Focus, Underline],
-      onUpdate: ({ editor }) => {
-        setEditorContent(editor.getJSON());
-      },
-      content: initialContent,
-    });
-  } else {
-    editor = useEditor({
-      editable: canEditNotes,
-      extensions: [StarterKit, Focus, Underline],
-      onUpdate: ({ editor }) => {
-        setEditorContent(editor.getJSON());
-      },
-      content: editorContent,
-    });
-  }
 
+  let initialContent = { type: "doc", content: notesContent[0].content };
+  const editor = useEditor({
+    editable: canEditNotes,
+    extensions: [StarterKit, Focus, Underline],
+    onUpdate: ({ editor }) => {
+      setEditorContent(editor.getJSON());
+    },
+    content: initialContent,
+  });
   useEffect(() => {
     if (!editor) {
       return undefined;
     }
-    fetch(notesUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        let cityNotes = data.filter((item) => item.city === city.toLowerCase());
-        setEditorContent(cityNotes[0].content);
-      })
-      .catch((err) => console.error(err));
-    console.log(editorContent);
+
     if (canEditNotes === true) {
       editor.setEditable(true);
     }
-  }, [editor, canEditNotes, initialContent]);
+  }, [editor, canEditNotes]);
   const saveNotes = (content) => {
     let url = isDevEnv
       ? "http://localhost:3000/api/notes"
@@ -175,14 +153,14 @@ export default ({
       }),
     })
       .then((res) => res.json())
-      .then((result) => result)
+      .then((result) =>
+        setEditorContent({ type: "doc", content: result.content })
+      )
       .catch((err) => console.log("error: ", err));
 
     setCanEditNotes(false);
   };
-  if (notes == null) {
-    return <div>loading...</div>;
-  }
+
   return (
     <div>
       {canEditNotes && <MenuBar editor={editor} />}
