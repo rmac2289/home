@@ -115,7 +115,8 @@ export default ({
 }) => {
   const [editorContent, setEditorContent] = useState({
     type: "doc",
-    content: "",
+    content: notes.filter((note) => note.city === city.toLowerCase())[0]
+      .content,
   });
   let notesContent = notes.filter((note) => note.city === city.toLowerCase());
 
