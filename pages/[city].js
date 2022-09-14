@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { Checklist } from "../components/Checklist";
 import Nav from "../components/Nav";
 import Weather from "../components/Weather";
+import NonSSRWrapper from "../components/NonSSRWrapper";
 
 export default function City({
   checklistData,
@@ -15,9 +16,8 @@ export default function City({
   const weather = dataArray.filter((city) => city.cityName === currentCity);
 
   let data = checklistData;
-
   return (
-    <>
+    <NonSSRWrapper>
       <Nav />
       <div className="container">
         <header>
@@ -76,7 +76,7 @@ export default function City({
           }
         `}
       </style>
-    </>
+    </NonSSRWrapper>
   );
 }
 export async function getStaticPaths() {

@@ -1,9 +1,8 @@
 import { EditorContent, useEditor } from "@tiptap/react";
-import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import Focus from "@tiptap/extension-focus";
 import Underline from "@tiptap/extension-underline";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -114,26 +113,29 @@ export default ({
   notes,
   notesUrl,
 }) => {
-  let notesContent = notes.filter((note) => note.city === city.toLowerCase());
   const [editorContent, setEditorContent] = useState({
     type: "doc",
     content: "",
   });
+  let notesContent = notes.filter((note) => note.city === city.toLowerCase());
 
   let initialContent = { type: "doc", content: notesContent[0].content };
+
   const editor = useEditor({
     editable: canEditNotes,
     extensions: [StarterKit, Focus, Underline],
     onUpdate: ({ editor }) => {
       setEditorContent(editor.getJSON());
     },
-    content: initialContent,
+    content: editorContent.content !== "" ? editorContent : initialContent,
   });
   useEffect(() => {
     if (!editor) {
       return undefined;
     }
-
+    if (editorContent.content === "") {
+      setEditorContent(initialContent);
+    }
     if (canEditNotes === true) {
       editor.setEditable(true);
     }
@@ -153,9 +155,10 @@ export default ({
       }),
     })
       .then((res) => res.json())
-      .then((result) =>
-        setEditorContent({ type: "doc", content: result.content })
-      )
+      .then((result) => {
+        console.log(result.content);
+        setEditorContent({ type: "doc", content: result.content });
+      })
       .catch((err) => console.log("error: ", err));
 
     setCanEditNotes(false);
